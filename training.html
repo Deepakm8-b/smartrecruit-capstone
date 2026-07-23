@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SmartRecruit - Training Sessions</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <nav class="nav">
+    <div class="nav-brand">Smart<span>Recruit</span></div>
+    <div class="nav-links">
+      <a href="index.html">Home</a><a href="dashboard.html">Dashboard</a><a href="roadmap.html">Roadmap</a><a href="login.html">Logout</a>
+    </div>
+  </nav>
+  <div class="layout">
+    <div class="sidebar">
+      <div class="profile-box">
+        <div class="avatar">D</div>
+        <div class="pname">Deepak Bhandari</div>
+        <div class="prole">Premium · Training Tracker</div>
+        <div class="pbadge">⭐ Premium Active</div>
+      </div>
+      <nav class="snav">
+        <a href="dashboard.html">📊 Dashboard</a>
+        <a href="roadmap.html" class="prem">🗺 Career Roadmap</a>
+        <div class="snav-div"></div>
+        <a href="training.html" class="prem active">📚 Training Sessions ★</a>
+      </nav>
+      <div style="margin-top:16px">
+        <div class="card" style="padding:12px">
+          <div class="sec-title" style="margin-bottom:8px">📋 My Booked Sessions</div>
+          <p class="text-muted" style="font-size:11px;text-align:center;padding:8px 0">No sessions booked yet.</p>
+        </div>
+        <div style="background:#E1F5EE;border-radius:8px;padding:12px;border:1px solid #a7d7c5;margin-top:8px">
+          <div style="font-size:11px;font-weight:700;color:#065F46;margin-bottom:4px">🏆 Badge Progress</div>
+          <div class="prog-bg"><div class="prog-fill" style="width:0%;background:#065F46"></div></div>
+          <p class="text-muted" style="font-size:10px;margin-top:4px">0 of 3 sessions → Training Badge</p>
+        </div>
+      </div>
+    </div>
+    <div class="main">
+      <div class="page-header">
+        <h1 class="page-title">📚 Training Sessions</h1>
+        <p class="page-sub">Book industry-certified sessions to fill skill gaps and earn digital certificates</p>
+      </div>
+      <div class="info-box">
+        <h5>Why training matters for your roadmap</h5>
+        <p>Completing Cloud, Azure, and Docker training will add those skills to your profile and increase your match score by 15–25% across 8 open jobs.</p>
+      </div>
+      <div class="scard">
+        <div>
+          <div class="stitle">Microsoft Azure Fundamentals (AZ-900)</div>
+          <div class="spartner">Microsoft Learning · Official Partner</div>
+          <div class="smeta"><span>📅 20 May 2026</span><span>⏰ 9am–5pm</span><span>📍 Sydney CBD</span><span>⏱ 8 hours</span></div>
+          <div class="tags mt-8"><span class="tag tag-a">Cloud</span><span class="tag tag-a">Azure</span><span class="tag">AZ-900</span></div>
+        </div>
+        <div class="sright">
+          <div class="sprice">$120</div>
+          <div class="sseats">8 of 25 seats</div>
+          <div class="seats-bg"><div class="seats-fill" style="width:68%"></div></div>
+          <form action="book_session.php" method="POST">
+            <input type="hidden" name="session_id" value="1">
+            <input type="submit" value="Book Session" class="btn btn-primary btn-sm">
+          </form>
+        </div>
+      </div>
+      <div class="scard">
+        <div>
+          <div class="stitle">AWS Cloud Practitioner Essentials</div>
+          <div class="spartner">AWS Training and Certification Australia</div>
+          <div class="smeta"><span>📅 27 May 2026</span><span>⏰ 9am–5pm</span><span>📍 Online</span><span>⏱ 8 hours</span></div>
+          <div class="tags mt-8"><span class="tag tag-a">AWS</span><span class="tag tag-a">Cloud</span><span class="tag">EC2</span><span class="tag">S3</span></div>
+        </div>
+        <div class="sright">
+          <div class="sprice">$95</div>
+          <div class="sseats">15 of 30 seats</div>
+          <div class="seats-bg"><div class="seats-fill" style="width:50%"></div></div>
+          <form action="book_session.php" method="POST">
+            <input type="hidden" name="session_id" value="2">
+            <input type="submit" value="Book Session" class="btn btn-primary btn-sm">
+          </form>
+        </div>
+      </div>
+      <div class="scard">
+        <div>
+          <div class="stitle">Docker and Containerisation Fundamentals</div>
+          <div class="spartner">Linux Australia Training · Official Partner</div>
+          <div class="smeta"><span>📅 3 June 2026</span><span>⏰ 9am–1pm</span><span>📍 Sydney CBD</span><span>⏱ 4 hours</span></div>
+          <div class="tags mt-8"><span class="tag tag-a">Docker</span><span class="tag">Linux</span><span class="tag">Containers</span></div>
+        </div>
+        <div class="sright">
+          <div class="sprice">$75</div>
+          <div class="sseats">20 of 25 seats</div>
+          <div class="seats-bg"><div class="seats-fill sf-amber" style="width:20%"></div></div>
+          <form action="book_session.php" method="POST">
+            <input type="hidden" name="session_id" value="3">
+            <input type="submit" value="Book Session" class="btn btn-primary btn-sm">
+          </form>
+        </div>
+      </div>
+      <div class="scard">
+        <div>
+          <div class="stitle">Cisco CCNA Networking Fundamentals</div>
+          <div class="spartner">Cisco Networking Academy Australia</div>
+          <div class="smeta"><span>📅 10 June 2026</span><span>⏰ 9am–5pm</span><span>📍 Sydney CBD</span><span>⏱ 8 hours</span></div>
+          <div class="tags mt-8"><span class="tag">Cisco</span><span class="tag">TCP/IP</span><span class="tag">Routing</span><span class="tag">CCNA</span></div>
+        </div>
+        <div class="sright">
+          <div class="sprice">$150</div>
+          <div class="sseats">18 of 25 seats</div>
+          <div class="seats-bg"><div class="seats-fill" style="width:28%"></div></div>
+          <form action="book_session.php" method="POST">
+            <input type="hidden" name="session_id" value="4">
+            <input type="submit" value="Book Session" class="btn btn-primary btn-sm">
+          </form>
+        </div>
+      </div>
+      <div class="scard">
+        <div>
+          <div class="stitle">Azure AI Fundamentals (AI-900)</div>
+          <div class="spartner">Microsoft Learning · Official Partner</div>
+          <div class="smeta"><span>📅 17 June 2026</span><span>⏰ 9am–1pm</span><span>📍 Online</span><span>⏱ 4 hours</span></div>
+          <div class="tags mt-8"><span class="tag">Azure</span><span class="tag tag-a">AI</span><span class="tag">AI-900</span></div>
+        </div>
+        <div class="sright">
+          <div class="sprice">$85</div>
+          <div class="sseats sf-red" style="color:#991B1B;font-weight:700">Session Full</div>
+          <div class="seats-bg"><div class="seats-fill sf-red" style="width:100%"></div></div>
+          <button class="btn btn-light btn-sm" disabled style="opacity:0.5">Session Full</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+</html>
