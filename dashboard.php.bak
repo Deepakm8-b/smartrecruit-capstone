@@ -1,0 +1,188 @@
+<?php
+session_start();
+require_once 'db.php';
+require_once 'profile_strength.php';
+
+if (!isset($_SESSION['user_id']) || $_SESSION['role'] !== 'student') {
+    header('Location: login.php');
+    exit;
+}
+
+$studentId = $_SESSION['user_id'];
+
+$stmt = $pdo->prepare('SELECT s.full_name, s.degree, s.university, u.email FROM students s JOIN users u ON s.user_id = u.user_id WHERE u.user_id = ?');
+$stmt->execute([$studentId]);
+$student = $stmt->fetch();
+
+$stmt = $pdo->prepare('SELECT s.student_id FROM students s WHERE s.user_id = ?');
+$stmt->execute([$studentId]);
+$stdData = $stmt->fetch();
+$studentRecordId = $stdData['student_id'] ?? 0;
+
+$isPremium = true;
+
+$stmt = $pdo->prepare('SELECT COUNT(*) FROM jobs');
+$stmt->execute();
+$matchCount = $stmt->fetchColumn();
+
+$stmt = $pdo->prepare('SELECT COUNT(*) FROM applications WHERE student_id = ?');
+$stmt->execute([$studentRecordId]);
+$appCount = $stmt->fetchColumn();
+
+$stmt = $pdo->prepare('SELECT COUNT(*) FROM applications WHERE student_id = ? AND status = "Shortlisted"');
+$stmt->execute([$studentRecordId]);
+$shortlistedCount = $stmt->fetchColumn();
+
+$profileScore = calculateProfileStrength($pdo, $studentRecordId);
+
+$stmt = $pdo->prepare('SELECT j.job_id, j.job_title, j.company, j.location, j.job_type, j.salary_range, j.required_skills, j.created_date FROM jobs j ORDER BY j.created_date DESC LIMIT 5');
+$stmt->execute();
+$topJobs = $stmt->fetchAll();
+?>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Dashboard - SmartRecruit</title>
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI'; background: #f5f7fa; }
+.navbar { background: white; padding: 16px 24px; border-bottom: 1px solid #e5e7eb; display: flex; justify-content: space-between; }
+.navbar h1 { font-size: 22px; font-weight: 700; }
+.navbar a { color: #1e40af; text-decoration: none; font-weight: 600; }
+.layout { display: flex; min-height: calc(100vh - 60px); }
+.sidebar { width: 220px; background: white; border-right: 1px solid #e5e7eb; padding: 20px; overflow-y: auto; }
+.profile-card { background: #f9fafb; padding: 16px; border-radius: 8px; margin-bottom: 20px; text-align: center; }
+.avatar { width: 60px; height: 60px; background: #1e40af; color: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 24px; font-weight: 700; margin: 0 auto 12px; }
+.username { font-weight: 700; margin-bottom: 4px; }
+.user-role { font-size: 12px; color: #6b7280; margin-bottom: 8px; }
+.premium-badge { display: inline-block; background: #fef3c7; color: #92400e; padding: 4px 8px; border-radius: 4px; font-size: 11px; font-weight: 600; }
+.sidebar-nav { display: flex; flex-direction: column; gap: 6px; margin-bottom: 20px; }
+.sidebar-nav a { padding: 10px 12px; border-radius: 6px; text-decoration: none; color: #6b7280; font-size: 13px; font-weight: 600; }
+.sidebar-nav a:hover { background: #f3f4f6; color: #1e40af; }
+.sidebar-nav a.active { background: #dbeafe; color: #1e40af; }
+.progress-section { background: #f9fafb; padding: 16px; border-radius: 8px; }
+.progress-label { font-size: 12px; font-weight: 600; margin-bottom: 8px; }
+.progress-bar { width: 100%; height: 6px; background: #e5e7eb; border-radius: 3px; overflow: hidden; margin-bottom: 4px; }
+.progress-fill { height: 100%; background: #1e40af; }
+.progress-pct { font-size: 11px; color: #6b7280; }
+.main { flex: 1; padding: 24px 32px; }
+.page-title { font-size: 28px; font-weight: 700; margin-bottom: 20px; }
+.premium-banner { background: linear-gradient(135deg, #fef3c7, #fcd34d); padding: 20px; border-radius: 8px; margin-bottom: 24px; display: flex; justify-content: space-between; align-items: center; }
+.premium-banner h3 { margin-bottom: 4px; }
+.premium-banner p { font-size: 13px; color: #92400e; }
+.upgrade-btn { background: #1e40af; color: white; padding: 10px 20px; border-radius: 6px; text-decoration: none; font-weight: 600; }
+.stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-bottom: 32px; }
+.stat-card { background: white; padding: 20px; border-radius: 8px; border: 1px solid #e5e7eb; }
+.stat-num { font-size: 32px; font-weight: 700; color: #1e40af; }
+.stat-label { font-size: 12px; color: #6b7280; margin-top: 4px; }
+.section-title { font-size: 18px; font-weight: 700; margin-bottom: 16px; }
+.jobs { display: flex; flex-direction: column; gap: 12px; }
+.jcard { background: white; padding: 16px; border-radius: 8px; border: 1px solid #e5e7eb; display: flex; justify-content: space-between; align-items: flex-start; }
+.jtitle { font-size: 15px; font-weight: 700; color: #1e40af; margin-bottom: 4px; }
+.jcomp { font-size: 12px; color: #6b7280; }
+.tags { display: flex; gap: 6px; margin-top: 8px; flex-wrap: wrap; }
+.tag { background: #f3f4f6; color: #6b7280; padding: 3px 6px; border-radius: 3px; font-size: 11px; }
+.match { font-weight: 700; color: #1e40af; }
+</style>
+</head>
+<body>
+
+<div class="navbar">
+    <h1>Smart<span style="color: #1e40af;">Recruit</span></h1>
+    <a href="logout.php">Logout</a>
+</div>
+
+<div class="layout">
+    <div class="sidebar">
+        <div class="profile-card">
+            <div class="avatar">D</div>
+            <div class="username"><?php echo htmlspecialchars($student['full_name']); ?></div>
+            <div class="user-role"><?php echo htmlspecialchars($student['university']); ?></div>
+            <?php if ($isPremium): ?>
+                <span class="premium-badge">⭐ Premium</span>
+            <?php endif; ?>
+        </div>
+
+        <div class="sidebar-nav">
+            <a href="dashboard.php" class="active">📊 Dashboard</a>
+            <a href="jobs.php">💼 Job Matches</a>
+            <a href="applications.php">📋 Applications</a>
+            <a href="roadmap.php">🗺️ Roadmap</a>
+            <a href="profile.php">👤 Profile</a>
+            <?php if ($isPremium): ?>
+                <a href="training.php">⭐ Training</a>
+                <a href="referrals.php">⭐ Referrals</a>
+                <a href="reference.php">⭐ Reference</a>
+            <?php else: ?>
+                <a href="upgrade.php">⭐ Upgrade</a>
+            <?php endif; ?>
+        </div>
+
+        <div class="progress-section">
+            <div class="progress-label">Profile Strength</div>
+            <div class="progress-bar">
+                <div class="progress-fill" style="width:<?php echo $profileScore; ?>%"></div>
+            </div>
+            <div class="progress-pct"><?php echo $profileScore; ?>%</div>
+        </div>
+    </div>
+
+    <div class="main">
+        <div class="page-title">Welcome back, <?php echo htmlspecialchars($student['full_name']); ?> 👋</div>
+
+        <?php if (!$isPremium): ?>
+            <div class="premium-banner">
+                <div>
+                    <h3>⭐ Unlock Premium</h3>
+                    <p>Access training, referrals, and reference letters</p>
+                </div>
+                <a href="upgrade.php" class="upgrade-btn">Upgrade Now</a>
+            </div>
+        <?php endif; ?>
+
+        <div class="stats">
+            <div class="stat-card">
+                <div class="stat-num"><?php echo $matchCount; ?></div>
+                <div class="stat-label">Job Matches</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-num"><?php echo $appCount; ?></div>
+                <div class="stat-label">Applied</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-num"><?php echo $shortlistedCount; ?></div>
+                <div class="stat-label">Shortlisted</div>
+            </div>
+        </div>
+
+        <div class="section-title">Top Recommended Jobs</div>
+        <div class="jobs">
+            <?php if (count($topJobs) > 0): ?>
+                <?php foreach ($topJobs as $job): ?>
+                    <div class="jcard">
+                        <div>
+                            <div class="jtitle"><?php echo htmlspecialchars($job['job_title']); ?></div>
+                            <div class="jcomp"><?php echo htmlspecialchars($job['company']); ?> · <?php echo htmlspecialchars($job['location']); ?></div>
+                            <div class="tags">
+                                <?php if ($job['required_skills']): ?>
+                                    <?php foreach (explode(',', $job['required_skills']) as $skill): ?>
+                                        <span class="tag"><?php echo trim($skill); ?></span>
+                                    <?php endforeach; ?>
+                                <?php endif; ?>
+                            </div>
+                        </div>
+                        <div>
+                            <span class="match">92%</span>
+                        </div>
+                    </div>
+                <?php endforeach; ?>
+            <?php else: ?>
+                <p style="color: #6b7280;">No jobs available</p>
+            <?php endif; ?>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>

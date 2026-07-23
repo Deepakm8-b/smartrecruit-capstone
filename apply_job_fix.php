@@ -1,0 +1,1 @@
+sed -i '' 's/<button type="submit" class="btn btn-success">✓ Submit Application<\/button>/<button type="submit" class="btn btn-success" onclick="this.form.step.value=4;">✓ Submit Application<\/button>/g' /Applications/XAMPP/xamppfiles/htdocs/smartrecruit/apply_job.php

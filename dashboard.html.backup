@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SmartRecruit - Student Dashboard</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <nav class="nav">
+    <div class="nav-brand">Smart<span>Recruit</span></div>
+    <div class="nav-links">
+      <a href="index.html">Home</a>
+      <a href="jobs.html">Jobs</a>
+      <a href="roadmap.html" style="color:#FCD34D">Roadmap ★</a>
+      <a href="training.html">Training</a>
+      <a href="premium.html" style="color:#FCD34D">Premium ★</a>
+      <a href="login.html">Logout</a>
+    </div>
+  </nav>
+
+  <div class="layout">
+
+    <!-- SIDEBAR -->
+    <div class="sidebar">
+      <div class="profile-box">
+        <div class="avatar">D</div>
+        <div class="pname">Deepak Bhandari</div>
+        <div class="prole">Bachelor of IT · Excelsia UC</div>
+        <div class="pbadge">⭐ Premium Active</div>
+      </div>
+      <nav class="snav">
+        <a href="dashboard.html" class="active">📊 Dashboard</a>
+        <a href="jobs.html">💼 Job Listings</a>
+        <a href="jobs.html">📋 My Applications</a>
+        <div class="snav-div"></div>
+        <a href="roadmap.html" class="prem">🗺 Career Roadmap ★</a>
+        <a href="training.html" class="prem">📚 Training ★</a>
+        <a href="training.html" class="prem">🤝 Referral Status ★</a>
+        <a href="premium.html" class="prem">🏆 Certificates ★</a>
+        <div class="snav-div"></div>
+        <a href="login.html">⚙️ Settings</a>
+      </nav>
+      <div class="prog-label">PROFILE STRENGTH</div>
+      <div class="prog-bg"><div class="prog-fill" style="width:78%"></div></div>
+      <div class="prog-pct">78%</div>
+    </div>
+
+    <!-- MAIN -->
+    <div class="main">
+      <div class="page-header">
+        <h1 class="page-title">Good morning, Deepak 👋</h1>
+        <p class="page-sub">Here is your SmartRecruit overview — Monday 4 May 2026</p>
+      </div>
+
+      <div class="stat-grid">
+        <div class="stat-card"><div class="stat-n">24</div><div class="stat-l">Job Matches Found</div></div>
+        <div class="stat-card"><div class="stat-n">6</div><div class="stat-l">Applications Sent</div></div>
+        <div class="stat-card g"><div class="stat-n">3</div><div class="stat-l">Shortlisted by Orgs</div></div>
+        <div class="stat-card a"><div class="stat-n">91%</div><div class="stat-l">Top Match Score</div></div>
+      </div>
+
+      <div class="premium-banner">
+        <div class="pb-text">
+          <h3>⭐ Premium Active — Career Roadmap Ready</h3>
+          <p>Your AI-generated career roadmap is ready. You have 3 skill gaps to close before reaching your target role: IT Support Specialist.</p>
+        </div>
+        <a href="roadmap.html" class="btn btn-light">View Roadmap →</a>
+      </div>
+
+      <div class="sec-header">
+        <div class="sec-title">🔥 Top Job Matches For You</div>
+        <a href="jobs.html" class="btn btn-light btn-sm">View All Jobs →</a>
+      </div>
+
+      <div class="jcard">
+        <div>
+          <div class="jtitle">IT Support Specialist</div>
+          <div class="jcomp">Reliable IT Solutions · North Strathfield, NSW</div>
+          <div class="jmeta">Full-time · $55,000–$65,000 · Closes 20 May 2026</div>
+          <div class="tags">
+            <span class="tag">Windows</span>
+            <span class="tag">Networking</span>
+            <span class="tag">Helpdesk</span>
+            <span class="tag">Active Directory</span>
+          </div>
+        </div>
+        <div class="jright">
+          <div class="match-badge">91%</div>
+          <span class="badge bg">✓ Applied</span>
+        </div>
+      </div>
+
+      <div class="jcard">
+        <div>
+          <div class="jtitle">Junior Software Developer</div>
+          <div class="jcomp">Atlassian · Sydney CBD, NSW</div>
+          <div class="jmeta">Full-time · $70,000–$85,000 · Closes 15 May 2026</div>
+          <div class="tags">
+            <span class="tag">Python</span>
+            <span class="tag">JavaScript</span>
+            <span class="tag">REST API</span>
+            <span class="tag">Git</span>
+          </div>
+        </div>
+        <div class="jright">
+          <div class="match-badge">84%</div>
+          <span class="badge bprem">⭐ Referred</span>
+        </div>
+      </div>
+
+      <div class="jcard">
+        <div>
+          <div class="jtitle">Network Administrator</div>
+          <div class="jcomp">Telstra · Melbourne, VIC</div>
+          <div class="jmeta">Full-time · $60,000–$72,000 · Closes 30 May 2026</div>
+          <div class="tags">
+            <span class="tag">TCP/IP</span>
+            <span class="tag">Cisco</span>
+            <span class="tag">Firewalls</span>
+            <span class="tag">VLAN</span>
+          </div>
+        </div>
+        <div class="jright">
+          <div class="match-badge" style="background:#185FA5">76%</div>
+          <span class="badge bb">New</span>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+</body>
+</html>

@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SmartRecruit - Organisation Dashboard</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <nav class="nav">
+    <div class="nav-brand">Smart<span>Recruit</span></div>
+    <div class="nav-links">
+      <a href="index.html">Home</a><a href="login.html">Logout</a>
+    </div>
+  </nav>
+  <div class="layout">
+    <div class="sidebar">
+      <div class="profile-box">
+        <div class="avatar av-g">R</div>
+        <div class="pname">Reliable IT Solutions</div>
+        <div class="prole">ABN: 12 345 678 901</div>
+        <div class="pbadge">🏢 Verified Partner</div>
+      </div>
+      <nav class="snav">
+        <a href="organisation.html" class="active">📊 Dashboard</a>
+        <a href="organisation.html">💼 Job Postings</a>
+        <a href="organisation.html">👥 Candidates</a>
+        <a href="organisation.html">🤝 Referrals</a>
+        <div class="snav-div"></div>
+        <a href="organisation.html">💰 Commission History</a>
+      </nav>
+      <div class="comm-box" style="margin-top:16px">
+        <h4>Commission Model</h4>
+        <p>Pay only when a referred candidate is hired.<br><br>Rate: <strong>10–20%</strong> of first-year salary.<br>Invoice due within 30 days.</p>
+      </div>
+    </div>
+    <div class="main">
+      <div class="page-header">
+        <div class="sec-header">
+          <div>
+            <h1 class="page-title">🏢 Organisation Dashboard</h1>
+            <p class="page-sub">Reliable IT Solutions · North Strathfield, NSW</p>
+          </div>
+          <a href="#" class="btn btn-primary">+ Post New Job</a>
+        </div>
+      </div>
+      <div class="stat-grid">
+        <div class="stat-card"><div class="stat-n">5</div><div class="stat-l">Active Job Postings</div></div>
+        <div class="stat-card"><div class="stat-n">48</div><div class="stat-l">Total Applicants</div></div>
+        <div class="stat-card g"><div class="stat-n">12</div><div class="stat-l">Shortlisted</div></div>
+        <div class="stat-card a"><div class="stat-n">3</div><div class="stat-l">SR Referrals</div></div>
+      </div>
+      <div class="sec-header">
+        <div class="sec-title">🏆 AI-Ranked Candidates — IT Support Specialist</div>
+        <span class="badge bb">Sorted by match score</span>
+      </div>
+      <div class="cand-card">
+        <div style="flex:1">
+          <div class="cname">Deepak Bhandari</div>
+          <div class="cdeg">Bachelor of IT · Excelsia University College · GPA 3.7</div>
+          <div class="cgpa">Skills: Windows, Networking, Helpdesk, Active Directory, Python</div>
+          <div class="tags mt-8"><span class="tag tag-g">Windows ✓</span><span class="tag tag-g">Networking ✓</span><span class="tag tag-g">Helpdesk ✓</span></div>
+        </div>
+        <div style="text-align:right;flex-shrink:0">
+          <div class="match-badge" style="margin-bottom:8px">91%</div>
+          <div style="margin-bottom:6px"><span class="badge bprem">⭐ SR Referred</span></div>
+          <a href="#" class="btn btn-green btn-sm">Shortlist</a>
+        </div>
+      </div>
+      <div class="cand-card">
+        <div style="flex:1">
+          <div class="cname">Sarah Chen</div>
+          <div class="cdeg">Bachelor of Computer Science · UTS · GPA 3.5</div>
+          <div class="cgpa">Skills: Windows, Networking, Python, Java</div>
+          <div class="tags mt-8"><span class="tag tag-g">Windows ✓</span><span class="tag tag-g">Networking ✓</span></div>
+        </div>
+        <div style="text-align:right;flex-shrink:0">
+          <div class="match-badge" style="background:#185FA5;margin-bottom:8px">84%</div>
+          <div style="margin-bottom:6px"><span class="badge bg">Applied</span></div>
+          <a href="#" class="btn btn-primary btn-sm">Shortlist</a>
+        </div>
+      </div>
+      <div class="sec-title" style="margin-top:24px;margin-bottom:12px">💰 Commission Invoice — Pending</div>
+      <div class="card" style="background:linear-gradient(135deg,#E1F5EE,white);border-color:#065F46">
+        <div style="display:flex;justify-content:space-between;align-items:center">
+          <div>
+            <div style="font-size:13px;font-weight:700;color:#1E3A5F;margin-bottom:4px;font-family:'Plus Jakarta Sans',sans-serif">Invoice #SR-2026-001 — Deepak Bhandari Placement</div>
+            <div class="text-muted">First-year salary: $60,000 · Rate: 15% · Amount: <strong style="color:#065F46">$9,000</strong></div>
+            <div class="text-muted">Due: 15 June 2026 · Via PayPal</div>
+          </div>
+          <a href="#" class="btn btn-green btn-sm">Pay via PayPal</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

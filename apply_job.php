@@ -1,0 +1,255 @@
+<?php
+session_start();
+error_reporting(E_ALL);
+ini_set("display_errors", 1);
+require_once 'db.php';
+require_once 'functions.php';
+
+if (!isset($_SESSION['user_id']) || $_SESSION['role'] !== 'student') {
+    header('Location: login.php');
+    exit;
+}
+
+$userId = $_SESSION['user_id'];
+$jobId = intval($_GET['job_id'] ?? 0);
+$student = getStudentByUserId($pdo, $userId);
+$studentId = $student['student_id'] ?? 0;
+
+$stmt = $pdo->prepare('SELECT * FROM jobs WHERE job_id = ?');
+$stmt->execute([$jobId]);
+$job = $stmt->fetch();
+
+if (!$job) {
+    die('Job not found');
+}
+
+$success = false;
+$step = intval($_POST['step'] ?? $_GET['step'] ?? 1);
+
+$formData = [
+    'full_name' => $_POST['full_name'] ?? '',
+    'email' => $_POST['email'] ?? '',
+    'phone' => $_POST['phone'] ?? '',
+    'university' => $_POST['university'] ?? '',
+    'answers' => $_POST['answers'] ?? ''
+];
+
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['submit']) && $step == 4) {
+    $stmt = $pdo->prepare("INSERT INTO applications (student_id, job_id, resume_used, status, applied_date) VALUES (?, ?, ?, ?, NOW())");
+    $stmt->execute([$studentId, $jobId, $student["resume"] ?? "no_resume", "Applied"]);
+    $stmt = $pdo->prepare("INSERT INTO applications (student_id, job_id, resume_used, status, applied_date) VALUES (?, ?, ?, ?, NOW())");
+    $stmt->execute([$studentId, $jobId, $student["resume"] ?? "no_resume", "Applied"]);
+    $success = true;
+}
+
+$navEmail = '';
+$stmt = $pdo->prepare('SELECT email FROM users WHERE user_id = ?');
+$stmt->execute([$userId]);
+$navEmail = $stmt->fetchColumn();
+?>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Apply — SmartRecruit</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        .apply-container { max-width: 800px; margin: 0 auto; padding: 40px 20px; }
+        .apply-header { margin-bottom: 32px; }
+        .apply-header a { color: #1e40af; text-decoration: none; font-weight: 600; }
+        .apply-header h1 { font-size: 24px; font-weight: 700; margin: 16px 0 8px 0; }
+        .apply-header p { color: #6b7280; margin: 0; }
+        .progress-container { margin-bottom: 40px; }
+        .progress-steps { display: flex; justify-content: space-between; margin-bottom: 16px; }
+        .step { display: flex; flex-direction: column; align-items: center; gap: 8px; flex: 1; }
+        .step-number { width: 40px; height: 40px; border-radius: 50%; background: #f3f4f6; color: #9ca3af; display: flex; align-items: center; justify-content: center; font-weight: 700; }
+        .step.active .step-number { background: #1e40af; color: white; }
+        .step.completed .step-number { background: #10b981; color: white; }
+        .step-label { font-size: 12px; font-weight: 600; color: #6b7280; text-align: center; }
+        .step.active .step-label { color: #1e40af; }
+        .progress-bar { height: 4px; background: #e5e7eb; }
+        .progress-fill { height: 100%; background: #1e40af; }
+        .form-card { background: white; padding: 32px; border-radius: 8px; border: 1px solid #e5e7eb; }
+        .form-title { font-size: 18px; font-weight: 700; margin-bottom: 24px; }
+        .form-row { display: flex; gap: 16px; margin-bottom: 20px; }
+        .form-section { flex: 1; }
+        .form-section label { display: block; font-size: 12px; font-weight: 600; margin-bottom: 6px; }
+        .form-section input, .form-section textarea { width: 100%; padding: 10px; border: 1px solid #d1d5db; border-radius: 4px; font-family: inherit; }
+        .form-section textarea { min-height: 120px; }
+        .button-group { display: flex; gap: 12px; margin-top: 24px; }
+        button { background: #1e40af; color: white; padding: 11px 18px; border: none; border-radius: 4px; font-weight: 600; cursor: pointer; }
+        button:hover { background: #1e3a8a; }
+        .success-container { text-align: center; padding: 48px 32px; }
+        .success-icon { font-size: 64px; margin-bottom: 20px; }
+        .success-title { font-size: 24px; font-weight: 700; margin-bottom: 12px; }
+        .success-message { color: #6b7280; margin-bottom: 32px; }
+        .success-buttons { display: flex; flex-direction: column; gap: 12px; }
+        .success-link { padding: 12px 24px; border-radius: 6px; text-decoration: none; font-weight: 600; display: block; text-align: center; }
+        .success-link-primary { background: #1e40af; color: white; }
+        .success-link-secondary { background: #f3f4f6; color: #1f2937; }
+        .review-section { background: #f9fafb; padding: 16px; border-radius: 4px; margin-bottom: 20px; }
+        .review-label { font-size: 12px; font-weight: 600; color: #6b7280; margin-bottom: 8px; }
+        .review-value { font-size: 14px; color: #1f2937; }
+    </style>
+</head>
+<body>
+<?php include 'nav.php'; ?>
+
+<?php if ($success): ?>
+    <div class="apply-container">
+        <div class="success-container">
+            <div class="success-icon">✓</div>
+            <h1 class="success-title">Application Submitted!</h1>
+            <p class="success-message">Your application for <strong><?= htmlspecialchars($job['job_title']) ?></strong> has been sent successfully!</p>
+            <div class="success-buttons">
+                <a href="applications.php" class="success-link success-link-primary">📋 View My Applications</a>
+                <a href="dashboard.php" class="success-link success-link-secondary">← Back to Dashboard</a>
+                <a href="jobs.php" class="success-link success-link-secondary">🔍 Browse More Jobs</a>
+            </div>
+        </div>
+    </div>
+<?php else: ?>
+    <div class="apply-container">
+        <div class="apply-header">
+            <a href="jobs.php">← Back to Job Listings</a>
+            <h1><?= htmlspecialchars($job['job_title']) ?></h1>
+            <p><?= htmlspecialchars($job['company']) ?> • <?= htmlspecialchars($job['location']) ?></p>
+        </div>
+
+        <div class="progress-container">
+            <div class="progress-steps">
+                <div class="step <?= $step >= 1 ? 'active' : '' ?> <?= $step > 1 ? 'completed' : '' ?>">
+                    <div class="step-number"><?= $step > 1 ? '✓' : '1' ?></div>
+                    <div class="step-label">Profile</div>
+                </div>
+                <div class="step <?= $step >= 2 ? 'active' : '' ?> <?= $step > 2 ? 'completed' : '' ?>">
+                    <div class="step-number"><?= $step > 2 ? '✓' : '2' ?></div>
+                    <div class="step-label">Resume</div>
+                </div>
+                <div class="step <?= $step >= 3 ? 'active' : '' ?> <?= $step > 3 ? 'completed' : '' ?>">
+                    <div class="step-number"><?= $step > 3 ? '✓' : '3' ?></div>
+                    <div class="step-label">Questions</div>
+                </div>
+                <div class="step <?= $step >= 4 ? 'active' : '' ?>">
+                    <div class="step-number">4</div>
+                    <div class="step-label">Review</div>
+                </div>
+            </div>
+            <div class="progress-bar"><div class="progress-fill" style="width: <?= ($step / 4) * 100 ?>%;"></div></div>
+        </div>
+
+        <form method="POST" enctype="multipart/form-data">
+            <input type="hidden" name="step" value="<?= $step ?>">
+            <input type="hidden" name="full_name" value="<?= htmlspecialchars($formData['full_name']) ?>">
+            <input type="hidden" name="email" value="<?= htmlspecialchars($formData['email']) ?>">
+            <input type="hidden" name="phone" value="<?= htmlspecialchars($formData['phone']) ?>">
+            <input type="hidden" name="university" value="<?= htmlspecialchars($formData['university']) ?>">
+            <input type="hidden" name="answers" value="<?= htmlspecialchars($formData['answers']) ?>">
+            
+            <div class="form-card">
+                <?php if ($step == 1): ?>
+                    <div class="form-title">Step 1: Your Profile</div>
+                    <div class="form-row">
+                        <div class="form-section">
+                            <label>Full Name *</label>
+                            <input type="text" name="full_name" value="<?= htmlspecialchars($formData['full_name']) ?>" required>
+                        </div>
+                        <div class="form-section">
+                            <label>Email *</label>
+                            <input type="email" name="email" value="<?= htmlspecialchars($formData['email']) ?>" required>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-section">
+                            <label>Phone *</label>
+                            <input type="tel" name="phone" value="<?= htmlspecialchars($formData['phone']) ?>" required>
+                        </div>
+                        <div class="form-section">
+                            <label>University *</label>
+                            <input type="text" name="university" value="<?= htmlspecialchars($formData['university']) ?>" required>
+                        </div>
+                    </div>
+                    <div class="button-group">
+                        <button type="submit" name="step" value="2">Continue to Resume →</button>
+                    </div>
+
+                <?php elseif ($step == 2): ?>
+                    <div class="form-title">Step 2: Choose Your Resume</div>
+                    <div style="margin-bottom: 24px;">
+                        <div style="background: #f9fafb; padding: 16px; border-radius: 4px; margin-bottom: 16px;">
+                            <label style="display: flex; gap: 12px; cursor: pointer; margin: 0;">
+                                <input type="radio" name="resume_choice" value="current" checked>
+                                <span>
+                                    <div style="font-weight: 600; color: #1f2937;">Use Current Resume</div>
+                                    <div style="font-size: 13px; color: #6b7280;"><?= htmlspecialchars($student['resume'] ?? 'No resume uploaded') ?></div>
+                                    <a href="resume_management.php" class="btn btn-sm btn-info" target="_blank" style="margin-top: 8px; display: inline-block;">👁 View Resume</a>
+                                </span>
+                            </label>
+                        </div>
+                        <div style="background: #f9fafb; padding: 16px; border-radius: 4px;">
+                            <label style="display: flex; gap: 12px; cursor: pointer; margin: 0;">
+                                <input type="radio" name="resume_choice" value="new">
+                                <span>
+                                    <div style="font-weight: 600; color: #1f2937;">Upload New Resume</div>
+                                    <div style="font-size: 13px; color: #6b7280; margin-top: 8px;">
+                                        <input type="file" name="new_resume" accept=".pdf,.doc,.docx" style="display: block; margin-top: 8px;">
+                                    </div>
+                                </span>
+                            </label>
+                        </div>
+                    </div>
+                    <div class="button-group">
+                        <button type="submit" name="step" value="3">Continue to Questions →</button>
+                    </div>
+
+                <?php elseif ($step == 3): ?>
+                    <div class="form-title">Step 3: Answer Screening Questions</div>
+                    <div class="form-section">
+                        <label>Why are you interested in this role? *</label>
+                        <textarea name="answers" required><?= htmlspecialchars($formData['answers']) ?></textarea>
+                    </div>
+                    <div class="button-group">
+                        <button type="submit" name="step" value="4">Review Application →</button>
+                    </div>
+
+                <?php elseif ($step == 4): ?>
+                    <div class="form-title">Step 4: Review & Submit</div>
+                    <div class="review-section">
+                        <div class="review-label">Full Name</div>
+                        <div class="review-value"><?= htmlspecialchars($formData['full_name']) ?></div>
+                    </div>
+                    <div class="review-section">
+                        <div class="review-label">Email</div>
+                        <div class="review-value"><?= htmlspecialchars($formData['email']) ?></div>
+                    </div>
+                    <div class="review-section">
+                        <div class="review-label">Phone</div>
+                        <div class="review-value"><?= htmlspecialchars($formData['phone']) ?></div>
+                    </div>
+                    <div class="review-section">
+                        <div class="review-label">University</div>
+                        <div class="review-value"><?= htmlspecialchars($formData['university']) ?></div>
+                    </div>
+                    <div class="review-section">
+                        <div class="review-label">Job</div>
+                        <div class="review-value"><?= htmlspecialchars($job['job_title']) ?> at <?= htmlspecialchars($job['company']) ?></div>
+                    </div>
+                    <div class="review-section">
+                        <div class="review-label">Resume</div>
+                        <div class="review-value"><?= htmlspecialchars($student['resume'] ?? 'Not selected') ?></div>
+                    </div>
+                    <div class="review-section">
+                        <div class="review-label">Why interested</div>
+                        <div class="review-value"><?= htmlspecialchars($formData['answers']) ?></div>
+                    </div>
+                    <div class="button-group">
+                        <button type="submit" name="submit" value="1" style="background: #10b981;">✓ Submit Application</button>
+                    </div>
+                <?php endif; ?>
+            </div>
+        </form>
+    </div>
+<?php endif; ?>
+</body>
+</html>

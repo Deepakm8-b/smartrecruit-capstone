@@ -1,0 +1,173 @@
+<?php
+session_start();
+require_once 'db.php';
+require_once 'functions.php';
+
+if (!isset($_SESSION['user_id'])) { header('Location: login.php'); exit; }
+
+$userId = $_SESSION['user_id'];
+$student = getStudentByUserId($pdo, $userId);
+$jobId = intval($_GET['id'] ?? 0);
+
+// Get job details
+$stmt = $pdo->prepare('SELECT * FROM jobs WHERE job_id = ?');
+$stmt->execute([$jobId]);
+$job = $stmt->fetch();
+
+if (!$job) { header('Location: dashboard.php'); exit; }
+
+// Check if already applied
+$stmt = $pdo->prepare('SELECT * FROM applications WHERE student_id = ? AND job_id = ?');
+$stmt->execute([$student['student_id'], $jobId]);
+$alreadyApplied = $stmt->fetch() ? true : false;
+?>
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title><?= htmlspecialchars($job['job_title']) ?> — SmartRecruit</title>
+    <style>
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body { font-family: Arial; background: #f8fafc; }
+        .header { background: white; border-bottom: 1px solid #e5e7eb; padding: 20px; }
+        .header-nav { max-width: 1200px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; }
+        .header-nav a { color: #1e40af; text-decoration: none; font-weight: 600; }
+        .container { max-width: 1200px; margin: 0 auto; padding: 40px 20px; display: grid; grid-template-columns: 2fr 1fr; gap: 32px; }
+        .job-main { background: white; padding: 32px; border: 1px solid #e5e7eb; }
+        .job-header { margin-bottom: 32px; }
+        .job-title { font-size: 28px; font-weight: 800; margin-bottom: 8px; }
+        .job-company { font-size: 16px; color: #666; margin-bottom: 16px; }
+        .job-meta { display: flex; gap: 20px; font-size: 13px; color: #666; margin-bottom: 24px; flex-wrap: wrap; }
+        .job-meta-item { display: flex; align-items: center; gap: 6px; }
+        .divider { border-top: 1px solid #e5e7eb; margin: 24px 0; padding: 24px 0; }
+        .section-title { font-size: 14px; font-weight: 800; margin-bottom: 12px; }
+        .section-content { font-size: 13px; color: #333; line-height: 1.8; margin-bottom: 24px; }
+        .skills-list { display: flex; gap: 8px; flex-wrap: wrap; }
+        .skill-tag { background: #f0f9ff; color: #1e40af; padding: 6px 12px; font-size: 12px; font-weight: 600; border-radius: 0; }
+        .sidebar { position: sticky; top: 20px; }
+        .sidebar-card { background: white; padding: 24px; border: 1px solid #e5e7eb; margin-bottom: 16px; }
+        .salary-box { background: #f0fdf4; border: 2px solid #10b981; padding: 16px; margin-bottom: 16px; }
+        .salary { font-size: 20px; font-weight: 800; color: #10b981; }
+        .salary-period { font-size: 12px; color: #666; }
+        .btn { width: 100%; padding: 12px; border: none; font-weight: 600; cursor: pointer; font-size: 14px; margin-bottom: 12px; border-radius: 0; }
+        .btn-primary { background: #1e40af; color: white; }
+        .btn-primary:hover { background: #1e3a8a; }
+        .btn-secondary { background: #6b7280; color: white; }
+        .btn-secondary:hover { background: #4b5563; }
+        .btn-outline { background: white; color: #1e40af; border: 2px solid #1e40af; }
+        .btn-outline:hover { background: #f0f9ff; }
+        .match-score { background: #dbeafe; border-left: 4px solid #1e40af; padding: 12px; font-size: 12px; }
+        .match-score strong { color: #1e40af; }
+        @media (max-width: 768px) {
+            .container { grid-template-columns: 1fr; }
+            .sidebar { position: static; }
+        }
+    </style>
+</head>
+<body>
+
+<div class="header">
+    <div class="header-nav">
+        <a href="dashboard.php">← Back to Dashboard</a>
+        <span style="color: #1e40af; font-weight: 600;">SmartRecruit</span>
+    </div>
+</div>
+
+<div class="container">
+    
+    <!-- MAIN CONTENT -->
+    <div class="job-main">
+        
+        <div class="job-header">
+            <h1 class="job-title"><?= htmlspecialchars($job['job_title']) ?></h1>
+            <p class="job-company"><?= htmlspecialchars($job['company']) ?></p>
+            
+            <div class="job-meta">
+                <div class="job-meta-item">📍 <?= htmlspecialchars($job['location']) ?></div>
+                <div class="job-meta-item">💼 <?= htmlspecialchars($job['job_type'] ?? 'Full-time') ?></div>
+                <div class="job-meta-item">💰 <?= htmlspecialchars($job['salary_range']) ?></div>
+            </div>
+        </div>
+
+        <div class="divider">
+            <h2 class="section-title">About This Role</h2>
+            <p class="section-content"><?= nl2br(htmlspecialchars($job['description'] ?? 'No description available')) ?></p>
+        </div>
+
+        <div class="divider">
+            <h2 class="section-title">Required Skills</h2>
+            <div class="skills-list">
+                <?php 
+                $skills = explode(',', $job['required_skills'] ?? 'N/A');
+                foreach ($skills as $skill):
+                    if (trim($skill)):
+                ?>
+                    <span class="skill-tag"><?= htmlspecialchars(trim($skill)) ?></span>
+                <?php 
+                    endif;
+                endforeach;
+                ?>
+            </div>
+        </div>
+
+        <div class="divider">
+            <h2 class="section-title">Job Details</h2>
+            <table style="width: 100%; font-size: 13px; line-height: 1.8;">
+                <tr>
+                    <td style="width: 150px; color: #666;"><strong>Job Type</strong></td>
+                    <td><?= htmlspecialchars($job['job_type'] ?? 'N/A') ?></td>
+                </tr>
+                <tr>
+                    <td style="color: #666;"><strong>Closes</strong></td>
+                    <td><?= date('M d, Y', strtotime($job['closes_date'] ?? date('Y-m-d'))) ?></td>
+                </tr>
+                <tr>
+                    <td style="color: #666;"><strong>Posted</strong></td>
+                    <td><?= date('M d, Y', strtotime($job['created_date'])) ?></td>
+                </tr>
+            </table>
+        </div>
+
+    </div>
+
+    <!-- SIDEBAR -->
+    <div class="sidebar">
+        
+        <div class="sidebar-card">
+            <div class="salary-box">
+                <div class="salary"><?= htmlspecialchars($job['salary_range']) ?></div>
+                <div class="salary-period">per year</div>
+            </div>
+
+            <div class="match-score">
+                <strong>Your Match: 87%</strong>
+                <p style="margin-top: 4px; color: #666;">You meet most of the requirements for this role.</p>
+            </div>
+        </div>
+
+        <div class="sidebar-card">
+            <?php if ($alreadyApplied): ?>
+                <button class="btn btn-secondary" disabled>✓ Already Applied</button>
+            <?php else: ?>
+                <a href="apply_job.php?job_id=<?= $jobId ?>" style="text-decoration: none;">
+                    <button class="btn btn-primary">Apply Now</button>
+                </a>
+            <?php endif; ?>
+            
+            <button class="btn btn-outline">💾 Save Job</button>
+        </div>
+
+        <div class="sidebar-card">
+            <h3 class="section-title">About the Company</h3>
+            <p style="font-size: 12px; color: #666; line-height: 1.6;">
+                <?= htmlspecialchars($job['company']) ?> is a leading technology company dedicated to innovation and excellence in IT solutions.
+            </p>
+        </div>
+
+    </div>
+
+</div>
+
+</body>
+</html>

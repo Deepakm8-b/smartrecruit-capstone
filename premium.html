@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SmartRecruit - Premium Upgrade</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <nav class="nav">
+    <div class="nav-brand">Smart<span>Recruit</span></div>
+    <div class="nav-links">
+      <a href="index.html">Home</a><a href="dashboard.html">Dashboard</a><a href="login.html">Logout</a>
+    </div>
+  </nav>
+  <div class="layout">
+    <div class="sidebar">
+      <div class="profile-box">
+        <div class="avatar">D</div>
+        <div class="pname">Deepak Bhandari</div>
+        <div class="prole">Current: Free Tier</div>
+      </div>
+      <nav class="snav">
+        <a href="dashboard.html">📊 Dashboard</a>
+        <a href="jobs.html">💼 Job Listings</a>
+        <div class="snav-div"></div>
+        <a href="premium.html" class="prem active">⭐ Upgrade to Premium</a>
+      </nav>
+      <div style="margin-top:16px;background:#FAEEDA;border-radius:8px;padding:12px;border:1px solid #e6c87a">
+        <div style="font-size:12px;font-weight:700;color:#92400E;margin-bottom:6px">🔒 PayPal Secure</div>
+        <div class="text-muted" style="font-size:11px">No card details stored on SmartRecruit. Payments via PayPal Sandbox in development.</div>
+      </div>
+    </div>
+    <div class="main">
+      <div style="background:linear-gradient(135deg,#1E3A5F,#185FA5);border-radius:14px;padding:28px;text-align:center;margin-bottom:24px">
+        <div style="font-size:28px;margin-bottom:10px">⭐</div>
+        <h2 style="color:white;margin-bottom:8px">Unlock Your Full Career Potential</h2>
+        <p style="color:#B5D4F4;font-size:13px;max-width:480px;margin:0 auto">Get AI career coaching, recruiter referrals, training sessions, and digital certificates — everything to land your first IT job faster.</p>
+      </div>
+      <div class="plans-grid">
+        <div class="plan-card">
+          <div class="plan-name">Free Tier</div>
+          <div class="plan-price" style="color:#64748B">$0<span>/forever</span></div>
+          <div class="plan-desc">Get started with basic job matching.</div>
+          <ul class="feat-list">
+            <li><span class="tick">✓</span> Register and build profile</li>
+            <li><span class="tick">✓</span> Browse all job listings</li>
+            <li><span class="tick">✓</span> AI match score on every job</li>
+            <li><span class="tick">✓</span> Apply to unlimited jobs</li>
+            <li><span class="cross">✗</span> Career roadmap</li>
+            <li><span class="cross">✗</span> Skill gap analysis</li>
+            <li><span class="cross">✗</span> Recruiter referrals</li>
+            <li><span class="cross">✗</span> Training sessions</li>
+            <li><span class="cross">✗</span> Digital certificates</li>
+          </ul>
+          <button class="btn btn-light btn-full" style="cursor:default">Current Plan</button>
+        </div>
+        <div class="plan-card rec">
+          <div class="rec-badge">⭐ MOST POPULAR</div>
+          <div class="plan-name" style="color:#185FA5">Premium</div>
+          <div class="plan-price">$49<span>/month</span></div>
+          <div class="plan-desc">Everything you need to get hired faster.</div>
+          <ul class="feat-list">
+            <li><span class="tick">✓</span> Everything in Free</li>
+            <li><span class="tick">✓</span> AI Career Roadmap (JSON)</li>
+            <li><span class="tick">✓</span> Skill gap analysis</li>
+            <li><span class="tick">✓</span> One-on-one coaching</li>
+            <li><span class="tick">✓</span> Direct recruiter referrals</li>
+            <li><span class="tick">✓</span> Training session bookings</li>
+            <li><span class="tick">✓</span> Digital certificates</li>
+            <li><span class="tick">✓</span> Reference letter on hire</li>
+            <li><span class="tick">✓</span> PayPal secure checkout</li>
+          </ul>
+          <form action="payment.php" method="POST">
+            <input type="hidden" name="plan" value="premium">
+            <input type="hidden" name="amount" value="49">
+            <input type="submit" value="Subscribe via PayPal → $49/month" class="btn btn-blue btn-full">
+          </form>
+        </div>
+      </div>
+      <div class="paypal-note">
+        🔒 <strong>Secure Payment via PayPal</strong> — SmartRecruit does not store any payment card details.<br>
+        All financial data is handled exclusively by PayPal. Cancel anytime from your PayPal account.<br>
+        <em>During development, PayPal Sandbox is used — no real payments are processed.</em>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

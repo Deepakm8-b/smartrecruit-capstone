@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SmartRecruit - Job Listings</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <nav class="nav">
+    <div class="nav-brand">Smart<span>Recruit</span></div>
+    <div class="nav-links">
+      <a href="index.html">Home</a>
+      <a href="dashboard.html">Dashboard</a>
+      <a href="jobs.html">Jobs</a>
+      <a href="roadmap.html">Roadmap</a>
+      <a href="training.html">Training</a>
+      <a href="login.html">Logout</a>
+    </div>
+  </nav>
+
+  <div class="layout">
+
+    <div class="sidebar">
+      <div class="profile-box">
+        <div class="avatar">D</div>
+        <div class="pname">Deepak Bhandari</div>
+        <div class="prole">Bachelor of IT · 78% profile</div>
+        <div class="pbadge">⭐ Premium Active</div>
+      </div>
+      <nav class="snav">
+        <a href="dashboard.html">📊 Dashboard</a>
+        <a href="jobs.html" class="active">💼 Job Listings</a>
+        <a href="jobs.html">📋 My Applications</a>
+        <div class="snav-div"></div>
+        <a href="roadmap.html" class="prem">🗺 Career Roadmap ★</a>
+        <a href="training.html" class="prem">📚 Training ★</a>
+      </nav>
+      <div style="margin-top:16px">
+        <div class="text-muted" style="font-size:10px;font-weight:700;margin-bottom:6px">YOUR SKILL PROFILE</div>
+        <div class="tags">
+          <span class="tag tag-g">Windows ✓</span>
+          <span class="tag tag-g">Networking ✓</span>
+          <span class="tag tag-g">Python ✓</span>
+          <span class="tag tag-g">MySQL ✓</span>
+          <span class="tag tag-a">Cloud —</span>
+          <span class="tag tag-a">Azure —</span>
+        </div>
+        <p class="text-muted mt-8">Skill gaps: <strong style="color:#92400E">Cloud, Azure, Docker</strong></p>
+      </div>
+    </div>
+
+    <div class="main">
+      <div class="page-header">
+        <h1 class="page-title">💼 Job Listings</h1>
+        <p class="page-sub">24 jobs matched to your profile · Sorted by match score</p>
+      </div>
+
+      <div class="search-bar">
+        <input type="text" placeholder="🔍 Search job title or skill..." oninput="filterJobs(this.value)">
+        <select>
+          <option value="">All Types</option>
+          <option>Full-time</option>
+          <option>Part-time</option>
+          <option>Internship</option>
+        </select>
+        <select>
+          <option value="">All Cities</option>
+          <option>Sydney</option>
+          <option>Melbourne</option>
+          <option>Brisbane</option>
+        </select>
+      </div>
+
+      <div class="jcard">
+        <div>
+          <div class="jtitle">IT Support Specialist</div>
+          <div class="jcomp">Reliable IT Solutions · North Strathfield, NSW</div>
+          <div class="jmeta">Full-time · $55,000–$65,000 · Closes 20 May 2026</div>
+          <div class="tags"><span class="tag">Windows</span><span class="tag">Networking</span><span class="tag">Helpdesk</span><span class="tag">Active Directory</span><span class="tag">ITIL</span></div>
+        </div>
+        <div class="jright">
+          <div class="match-badge">91%</div>
+          <span class="badge bg">Applied ✓</span>
+          <span class="badge bprem">⭐ Referred</span>
+        </div>
+      </div>
+
+      <div class="jcard">
+        <div>
+          <div class="jtitle">Junior Software Developer</div>
+          <div class="jcomp">Atlassian · Sydney CBD, NSW</div>
+          <div class="jmeta">Full-time · $70,000–$85,000 · Closes 15 May 2026</div>
+          <div class="tags"><span class="tag">Python</span><span class="tag">JavaScript</span><span class="tag">REST API</span><span class="tag">Git</span><span class="tag">React</span></div>
+        </div>
+        <div class="jright">
+          <div class="match-badge">84%</div>
+          <a href="#" class="btn btn-primary btn-sm">Apply Now</a>
+        </div>
+      </div>
+
+      <div class="jcard">
+        <div>
+          <div class="jtitle">Network Administrator</div>
+          <div class="jcomp">Telstra · Melbourne, VIC</div>
+          <div class="jmeta">Full-time · $60,000–$72,000 · Closes 30 May 2026</div>
+          <div class="tags"><span class="tag">TCP/IP</span><span class="tag">Cisco</span><span class="tag">Firewalls</span><span class="tag">VLAN</span><span class="tag">Routing</span></div>
+        </div>
+        <div class="jright">
+          <div class="match-badge" style="background:#185FA5">76%</div>
+          <a href="#" class="btn btn-primary btn-sm">Apply Now</a>
+        </div>
+      </div>
+
+      <div class="jcard">
+        <div>
+          <div class="jtitle">Helpdesk Analyst (Part-time)</div>
+          <div class="jcomp">Commonwealth Bank · Sydney, NSW</div>
+          <div class="jmeta">Part-time · $30–$38/hour · Closes 25 May 2026</div>
+          <div class="tags"><span class="tag">ServiceNow</span><span class="tag">Windows</span><span class="tag">Office 365</span><span class="tag">ITIL</span></div>
+        </div>
+        <div class="jright">
+          <div class="match-badge" style="background:#185FA5">72%</div>
+          <a href="#" class="btn btn-primary btn-sm">Apply Now</a>
+        </div>
+      </div>
+
+      <div class="jcard">
+        <div>
+          <div class="jtitle">Cloud Engineer Intern</div>
+          <div class="jcomp">AWS Australia · Sydney, NSW</div>
+          <div class="jmeta">Internship · $25/hour · Closes 10 June 2026</div>
+          <div class="tags"><span class="tag tag-a">AWS ⚠</span><span class="tag tag-a">Cloud ⚠</span><span class="tag">Python</span><span class="tag tag-a">Docker ⚠</span></div>
+        </div>
+        <div class="jright">
+          <div class="match-badge" style="background:#92400E">58%</div>
+          <a href="training.html" class="btn btn-light btn-sm">Fill Skill Gaps →</a>
+        </div>
+      </div>
+
+      <div class="jcard">
+        <div>
+          <div class="jtitle">Data Analyst</div>
+          <div class="jcomp">Woolworths Group · Brisbane, QLD</div>
+          <div class="jmeta">Full-time · $65,000–$78,000 · Closes 18 May 2026</div>
+          <div class="tags"><span class="tag">Python</span><span class="tag">SQL</span><span class="tag">Excel</span><span class="tag">Power BI</span></div>
+        </div>
+        <div class="jright">
+          <div class="match-badge" style="background:#185FA5">69%</div>
+          <a href="#" class="btn btn-primary btn-sm">Apply Now</a>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+</body>
+</html>
