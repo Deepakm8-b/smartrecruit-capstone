@@ -1,0 +1,1559 @@
+
+
+
+
+
+Student name
+Deepak Bhandari
+Student number
+2443463047
+Lecturer
+Dr Cesar Sanin
+Unit code and name
+ICT307A – IT Capstone Project A
+
+
+Assessment title
+
+For Smart Recruit — Smart Student–Organisation Recruitment Platform
+
+
+
+
+
+Due date
+03/05/2026
+
+
+Course enrolled
+
+Bachelor of Information Technology
+
+
+
+
+
+
+
+
+Acknowledgements
+I would also like to take this opportunity of expressing my deepest gratitude to my supervising lecturer at the Excelsia University College, Dr Cesar Sanin, on the various occasions of his guidance, constructive feedback, and support during the ICT307A Capstone Project A unit.
+I would also like to mention the usage of Claude, an AI assistant created by Anthropic, which helped to develop this project. Claude itself was a productivity and learning tool to support diagram generation, structuring of reports, SQL database design, and code drafting needs during the project life cycle. Any final decision, analysis, and interpretations, and the written work, are the original work of the student.
+This project was done as a part of Bachelor of Information Technology at Excelsia University College, Sydney, 2026.
+Table of Contents
+Executive Summary	2
+1.  Introduction	3
+    1.1 Project Overview	3
+    1.2 Product Scope	3
+    1.3 Project Deliverables	3
+    1.4 Intended Audience	4
+    1.5 Definition, Acronyms and Abbreviations 
+       (see Appendix A,B and C)	4
+2.  Requirements Engineering	5
+    2.1 Identification of Actors	5
+    2.2 Identification of External Entities and Boundaries	5
+    2.3 Identification of Functional Requirements	6
+    2.4 Identification of Non-Functional Requirements	7
+    2.5 User Stories	8
+    2.6 Use Cases	9
+3.  Conceptual Model	11
+    3.1  Technologies Used	8
+    3.2  System Overview	8
+    3.3  Architectural Pattern	9
+4.  Design Viewpoints	13
+    4.1  Logical Viewpoint — Object and Class Design	9
+    4.2  Information Viewpoint — Database Design	10
+    4.3  Interface Viewpoint — Front End Design	11
+    4.4  Interaction Viewpoint — Process and Workflow	12
+5.  Project Management	16
+    5.1  Project Model	12
+    5.2  Project Planning	13
+    5.3  Project Responsibilities	13
+    5.4  Project Budget	14
+    5.5  Project Schedule	14
+6.  Assumptions, Dependencies and Concerns	15
+    6.1  Assumptions	15
+    6.2  Dependencies	15
+    6.3  Constraints	15
+7.  Risk Management Plan	16
+    7.1  Risk Identification	16
+    7.2  Risk Analysis	16
+    7.3  Risk Evaluation	17
+8.  Meeting Times and Communication	17
+    8.1  Communication Plan	17
+    8.2  Meeting Minutes	17
+References	18
+	
+
+
+Executive Summary
+The report contains Software Requirements Specification (SRS) and Project Management Plan (PMP) of Smart Recruit which is a Smart Student - Organisation Recruitment Platform. The service will operate on the basis of aligning university graduates with the employment firms in Australia, through AI-based job matching, career guidance, recruiter referral services, and industry training workshops. The Smart Recruit platform helps to fill one of the major gaps in the Australian graduate employment market. Students are finding immense challenges with opportunities that are relevant to their skills and organisations are having difficulties in sourcing good entry-level talent effectively. Smart Recruit is responding to this by becoming a four in one business that is a job board, career coaching service, recruitment agency and a training provider. The site makes revenues in two forms namely, student Premium subscriptions, and organisation placement commissions, based on 10-20 percent of the first year salary of a successfully recruited student. The safe method of payments is through PayPal. The system is supposed to be written in PHP, MySQL, HTML, CSS and JavaScript awaiting final directive of the supervising lecturer. Every stage of the project (planning, development, and non-functional and functional requirements, system architecture, database design, wireframes, risk management, project schedule, and responsibilities) are covered in this document. 
+1. Introduction
+1.1 Project Overview
+Smart Recruit is a web based recruitment process which is set to bridge the gap between hiring organisations and the university students. The site enables the students to build detailed profiles, receive job recommendations based on skills, apply to jobs that match them and get organization career advice. The process of registering, posting job listing, viewing skill matched candidates and paying a placement 
+commission can only be effected once a Smart Recruit-referred student has been successfully recruited. The project is a personal capstone project under development in ICT307A in the Excelsia University College, Sydney. The platform will target addressing the gross gaps identified in the process of reviewing the existing recruitment platforms, including Seek, LinkedIn and Indeed.
+1.1.1 Competitor Analysis and Identified Gaps
+"A competitor analysis is a structured approach to identifying the strengths and weaknesses of existing platforms in the same market, with the goal of identifying opportunities to deliver superior value to users (Porter, 1980)."
+Three key recruitment websites (Seek, LinkedIn and Indeed) were analyzed in terms of user feedback and features to determine gaps in the existing offering to student and graduate job seekers in Australia.
+Platform
+Current Strengths
+Identified Gaps
+Seek
+Professional networking. Skill endorsements. Studying on Linked In Learning.
+No remarks on the rejected applications. All the career development related support. With a high level of hiring agencies, there is no communication and follow up by the hiring agency.
+LinkedIn
+Professional networking. Skill endorsements. Studying on Linked In Learning.
+Job recommendations are not done on the skills profile of students. Absence of a career planning map. Characteristics are more valuable to professional workers than to students and graduates.
+Indeed
+High volume of listings. Simple interface. Wide reach across industries.
+Irrelevant job recommendations irrelevant to abilities. No justifications when the applicants are not selected. No guidance of the skills that should be acquired. Not geared towards specialised jobs like IT and technical graduate jobs.
+
+Evaluation of these sites showed that the most prominent gaps can be observed in all three (Glassdoor, 2023; SEEK Learning, 2022): 
+	•	Lack of transparency and feedback - the users submit lots of applications but are not informed why they have been rejected and how they can improve their applications.
+ • Poor job matching - The job recommendations are not made properly considering the skills of the user or career objectives, especially in the specialised jobs in IT and technical areas. Lack of structured career guidance - the users are not assisted in helping them to understand what skills they need to learn to help them be job ready. 
+High level of reliance on hiring agencies- the result is poor communication, responsibility and less connection between the students and the employers. 
+None-identified skill gap platforms do not make the users aware of the existing gaps in skills and how to cope with them.
+1.1.2 How Smart Recruit Addresses These Gaps
+SmartRecruit particularly bridges the abovementioned gaps by offering career preparation, rather than job posting. The platform offers a skill-based recommendation system which matches students jobs based on their verified skills profile, identifies required skills, and offers a clear career plan of the steps the student needs to take to obtain the desired job. It allows interaction between students and organisations directly and eliminates the excessive use of recruiting agencies. Also, SmartRecruit ensures institutional email addresses are verified to ensure the authenticity of the profiles, which also increases the trust between hiring organisations and students. The project is feasible in the context of its scope of development since it concentrates on a number of main functionalities: user authentication, profile management, job posting, skills based matching with rule-of-thumb logic and simple recommendation output. The platform is implemented with a rule-based matching system, rather than complex machine learning, and it can be implemented within the scope of a one-developer capstone project with typical web technologies such as PHP, MySQL, HTML, CSS, and JavaScript (Sommerville, 2016).
+1.2 Product Scope
+Smart Recruit has four areas of core services. The first is matching student job matching whereby the system uses AI to match student profiles with job postings based on skills, education, and career interests. The second one is the career guidance whereby premium students are provided with individualised career roadmap, skills gap analysis, one-on-one coaching, reference letter and digital certificates. The third is the recruiter referral service whereby the platform owner personally refers qualified premium students to partner organisations. The fourth one is training sessions, in which premium students will be able to browse and book face-to-face or online training events provided by industry partners.
+1.3 Project Deliverables
+Phase
+Deliverable
+Week
+Status
+Planning
+Project Charter
+Week 2
+Completed
+Planning
+Risk Management Plan
+Week 3
+Completed
+Requirements
+Functional Requirements (FR01–FR20)
+Week 3
+Completed
+Requirements
+Non-Functional Requirements (NFR01–NFR10)
+Week 3
+Completed
+Requirements
+User Stories (US01–US13)
+Week 4
+Completed
+Requirements
+Use Cases (UC01–UC09)
+Week 4
+Completed
+Design
+System Architecture Diagram
+Week 5
+Completed
+Design
+ERD — 17 entities, Crow's Foot, 3NF
+Week 5
+Completed
+Design
+DFD Level 0, 1, and 2 (5 diagrams)
+Week 5
+Completed
+Design
+Use Case Diagram
+Week 5
+Completed
+Design
+Lo-Fi Wireframes — 7 screens
+Week 7
+Completed
+Design
+Hi-Fi Wireframes — 7 screens (brand colour)
+Week 7
+Completed
+Development
+MySQL Database — SQL file
+Week 7–8
+Completed
+Development
+PHP Prototype — core modules
+Week 7–8
+Planned — awaiting lecturer approval
+Management
+Gantt Chart — 8-week schedule
+Wk 8
+Completed
+Management
+RACI Matrix — 2 actors (Deepak + Cesar)
+Wk 8
+Completed
+Documentation
+Glossary — 54 terms
+Wk 8
+Completed
+Documentation
+Final SRS + PMP Report
+Wk 8
+In Progress
+
+1.4 Intended Audience
+This report is directed at academic assessors to assess the submission of ICT307A Assessment 2, the platform developer as technical blueprint, and future business stakeholders or investors to understand the design and functionality of the platform. 
+1.5 Definition, Acronyms and Abbreviations
+Any technical terms, acronyms, and abbreviations used in detail in this document are defined in the first appendix — Acronyms and Abbreviations, which immediately follows this introduction section. In Appendix B 54 terms in a complete glossary of terms covering database design, project management, and platform-specific terminology are provided.
+
+
+Appendix A — Acronyms and Abbreviations
+The following table defines all acronyms and abbreviations used throughout this Software Requirements Specification and Project Management Plan for the SmartRecruit platform.
+
+Acronym / Abbreviation
+Full Form
+Context
+SRS
+Software Requirements Specification
+Document type for this report
+PMP
+Project Management Plan
+Document type for this report
+ERD
+Entity Relationship Diagram
+Database design diagram
+DFD
+Data Flow Diagram
+System process flow diagram
+FR
+Functional Requirement
+System capability requirement
+NFR
+Non-Functional Requirement
+System quality requirement
+UC
+Use Case
+Actor-system interaction description
+US
+User Story
+User-perspective feature description
+RACI
+Responsible, Accountable, Consulted, Informed
+Project responsibility matrix
+3NF
+Third Normal Form
+Database normalisation standard
+PDO
+PHP Data Objects
+PHP database connectivity layer
+SDLC
+Software Development Life Cycle
+Development methodology framework
+MVC
+Model View Controller
+Software architectural pattern
+PHP
+Hypertext Preprocessor
+Server-side scripting language
+MySQL
+My Structured Query Language
+Relational database management system
+HTML
+HyperText Markup Language
+Frontend web structure language
+CSS
+Cascading Style Sheets
+Frontend web styling language
+JS
+JavaScript
+Frontend scripting language
+HTTP
+HyperText Transfer Protocol
+Web communication protocol
+HTTPS
+HyperText Transfer Protocol Secure
+Encrypted web communication protocol
+API
+Application Programming Interface
+System integration interface
+UI
+User Interface
+Visual interaction layer of the system
+UML
+Unified Modelling Language
+Standard notation for software diagrams
+APA
+American Psychological Association
+Referencing style used in this report
+ABN
+Australian Business Number
+Required for organisation registration
+ICT
+Information and Communications Technology
+Academic discipline for this unit
+GPA
+Grade Point Average
+Academic performance metric for students
+AI
+Artificial Intelligence
+Automated intelligence used in matching
+JSON
+JavaScript Object Notation
+Data format for career roadmap storage
+UK
+Unique Key
+Database constraint preventing duplicate values
+PK
+Primary Key
+Unique identifier for each database record
+FK
+Foreign Key
+Database field linking to another table
+ENUM
+Enumeration
+MySQL data type with predefined values
+BCrypt
+Blowfish Crypt
+Password hashing algorithm used in SmartRecruit
+
+
+Appendix B — Glossary of Terms
+A complete glossary of 54 terms and definitions is provided in the separate Glossary.docx file. Key terms are summarised below.
+
+Term
+Definition
+3NF
+Third Normal Form. A level of database normalisation applied to all 17 SmartRecruit tables to eliminate transitive dependencies and reduce data redundancy.
+BCrypt
+A password hashing algorithm used to securely store user passwords. BCrypt adds a salt and applies a configurable cost factor to prevent brute-force attacks.
+Commission
+A placement fee of 10–20% of first-year salary charged to hiring organisations when a SmartRecruit-referred student is successfully hired.
+ERD
+Entity Relationship Diagram. A visual representation of the 17 database entities, their attributes, and their relationships using Crow's Foot notation.
+Freemium
+A business model offering a free basic tier and a paid Premium tier. SmartRecruit charges students $49/month for Premium access.
+Match Score
+A DECIMAL(5,2) value calculated when a student applies for a job, representing the percentage skill compatibility between student and job requirements.
+PDO
+PHP Data Objects. A PHP extension used to connect to MySQL via prepared statements, preventing SQL injection attacks.
+RACI Matrix
+A project management tool defining Responsible, Accountable, Consulted, and Informed roles for each business activity. Only one Accountable per task.
+PayPal
+A third-party payment gateway integrated into SmartRecruit to process subscription fees, training bookings, and commission payments securely.
+Subscription
+A recurring payment of $49/month that grants students access to career coaching, referrals, training sessions, and certificates on SmartRecruit.
+
+Appendix C — Analysis Models
+The following diagrams support the system design documented in this report. All draw.io diagrams can be opened and edited using the free draw.io application at https://app.diagrams.net
+
+Figure
+Title
+File Reference
+Figure 1
+System Architecture Diagram
+SystemArchitecture_with_PayPal.xml
+Figure 2
+DFD Level 0 — Context Diagram
+DFD_L0_with_PayPal.xml
+Figure 3
+DFD Level 1 — Main Processes
+DFD_L1_with_PayPal.xml
+Figure 4
+Entity Relationship Diagram — 17 Entities (3NF)
+ERD_with_payments.png
+Figure 5
+Use Case Diagram
+UseCase_with_PayPal.xml
+Figure 6
+Low Fidelity Wireframes — 7 Screens
+Lofi_Wireframes_All.png
+Figure 7
+High Fidelity Wireframes — 8 Screens
+HiFi_Wireframes.html
+Figure 8
+Gantt Chart — 8-Week Project Schedule
+Gantt_Chart_Updated.png
+Figure 9
+RACI Responsibility Matrix — 2 Actors (Deepak + Cesar)
+RACI_2Actor.png
+Figure 10
+DFD Level 2 — P1 Student Profile
+DFD_L2_P1_StudentProfile.png
+Figure 11
+DFD Level 2 — P2 Organisation and Job
+DFD_L2_P2_OrgJob.xml
+Figure 12
+DFD Level 2 — P3 Matching
+DFD_L2_P3_Matching.xml
+Figure 13
+DFD Level 2 — P4 Career Roadmap
+DFD_L2_P4_clean.png
+Figure 14
+DFD Level 2 — P1 Student Profile Management
+DFD_L2_P1_StudentProfile.png
+Figure 15
+DFD Level 2 — P2 Organisation & Job Management
+DFD_L2_P2_OrgJob.xml
+Figure 16
+DFD Level 2 — P3 Job Matching & Applications
+DFD_L2_P3_Matching.xml
+Figure 17
+DFD Level 2 — P4 Career Guidance & Roadmap
+DFD_L2_P4_clean.png
+Figure 18
+DFD Level 2 — P5 Premium Services & Payment
+DFD_L2_P5_Premium_PayPal.xml
+Figure 19
+Gantt Chart — 8-Week Schedule + Future Plan
+Gantt_Chart_Updated.png
+Figure 20
+RACI Responsibility Matrix — 2 Actors (Deepak + Cesar)
+RACI_2Actor.png
+
+
+
+2. Requirements Engineering
+Requirements engineering may be defined as the process of identifying, documenting and managing the needs and expectations of stakeholders in a software system. Sommerville (2016) defines requirements engineering as the process of eliciting, analysing, validating and managing the requirements that define what a system should do and the constraints within which a system should operate. In the case of SmartRecruit, the requirements engineering process entailed an analysis of the needs of three main stakeholders, namely, students, organisations and the platform administrator.
+2.1 Identification of Actors
+An act in a use case diagram is a role that a user or other system or hardware takes when interacting with the system under modelling (Pressman and Maxim, 2020). There are four main actors of the SmartRecruit platform, which interacts with the system. The Student is a university student who signs up, creates a profile, applies to jobs, and is optional on the Premium tier. The Organisation is a hiring company that registers, posts job listings, views candidates and pays a commission on successful hires. The Admin is the owner of the platform who controls all the users, approves posts, issues referrals, and monitors operations. The Payment Gateway (PayPal) refers to an external system that handles all financial transactions such as subscriptions, bookings and commissions.
+Actor
+Type
+Description
+Student
+Primary
+University student who registers, creates profile, applies for jobs, and optionally subscribes to Premium for career guidance and referrals.
+Organisation
+Primary
+Hiring company that registers, posts jobs, views AI-matched candidates, and pays 10–20% commission on successful SmartRecruit referral hires.
+Admin (Platform Owner)
+Primary
+Manages platform operations, approves job postings, delivers career coaching, issues referrals and certificates, monitors all activity.
+Payment Gateway (PayPal)
+External System
+Third-party processor handling student Premium subscription payments ($49/mo) and organisation commission payments securely. No card details are stored on the SmartRecruit platform.
+
+2.2 Identification of External Entities, Boundaries and Interfaces
+A system boundary helps to determine what falls within the system and what falls outside (Yourdon, 1989)." The system boundary of the SmartRecruit system is defined as all the server-side PHP processing, the relational database MySQL, the front-end HTML/CSS/JavaScript and the PayPal payment integration layer. All components within this boundary are built and maintained by the platform. External entities are outside this boundary and will deal with the system using specified interfaces. 
+. The internal systems of the hiring organisations, university enrolment databases or third-party training providers are not considered to be part of the system boundary. In the current version, student enrolment verification is self-reported. The development and testing phase is carried out using the PayPal Sandbox environment, which is used to simulate all the payment transactions, until the platform is ready to be deployed in production. 
+
+2.3 Identification of Functional Requirements
+Functional requirements describe what a system should do - the specific behaviours, functions, or services that the system must offer to its users (Sommerville, 2016). The next 20 functional requirements were determined to be used in the SmartRecruit platform in three user roles.
+Student Requirements
+ID
+Requirement Description
+Priority
+FR01
+The system shall allow students to register using a valid email address and create a secure account.
+High
+FR02
+The system shall allow students to create and edit a profile including skills, degree, GPA, university, resume URL, and career interests.
+High
+FR03
+The system shall automatically calculate a match score when a student applies for a job, based on skill overlap percentage.
+High
+FR04
+The system shall generate an AI-driven career roadmap stored as JSON for each student based on their target role and current skills.
+High
+FR05
+The system shall allow students to apply for multiple job listings and track their application status.
+High
+FR06
+The system shall allow students to subscribe to the Premium tier via PayPal payment processing at $49 per month.
+High
+FR07
+The system shall allow students to view their career roadmap progress and update their skills profile at any time.
+Medium
+FR08
+The system shall issue digital certificates to premium students upon completion of training sessions or skill milestones.
+Medium
+FR09
+The system shall display each student's career roadmap, skill gap analysis, and matched job listings.
+Medium
+
+Organisation Requirements
+ID
+Requirement Description
+Priority
+FR10
+The system shall allow organisations to register and create a company profile including ABN, industry, and location.
+High
+FR11
+The system shall allow organisations to post, edit, and close job listings with required skills, salary range, and deadline.
+High
+FR12
+The system shall display AI-ranked candidate lists to organisations sorted by match score.
+High
+FR13
+The system shall allow organisations to shortlist candidates and update their application status.
+High
+FR14
+The system shall generate a commission invoice when a SmartRecruit-referred student is hired by an organisation.
+High
+
+Admin Requirements
+ID
+Requirement Description
+Priority
+FR15
+The system shall allow the admin to manage all user accounts including activation, suspension, and deletion.
+High
+FR16
+The system shall allow the admin to approve or reject job postings before they are published on the platform.
+High
+FR17
+The system shall allow the admin to create and manage referral records linking a student, organisation, job, and outcome.
+High
+FR18
+The system shall allow the admin to issue certificates and reference letters to premium students.
+Medium
+FR19
+The system shall maintain a complete admin audit trail recording all administrative actions with timestamps and IP addresses.
+High
+FR20
+The system shall process all Premium subscription and commission payments via PayPal and record each transaction with a PayPal reference number.
+High
+
+2.4 Identification of Non-Functional Requirements
+Non-functional requirements are quality attributes of a system - how well it can perform its functions instead of what functions it can perform (IEEE, 2011). The 10 non-functional requirements listed below are the quality requirements that the SmartRecruit platform is expected to satisfy.
+ID
+Category
+Requirement
+NFR01
+Performance
+All platform pages shall load within 3 seconds under normal usage conditions of up to 500 concurrent users.
+NFR02
+Security
+All user passwords shall be hashed using BCrypt with a cost factor of 10 before storage. No plaintext passwords shall ever be stored in the database.
+NFR03
+Security
+All database queries shall use PDO prepared statements to prevent SQL injection attacks.
+NFR04
+Security
+All payment transactions shall be processed through PayPal. During development and testing, the PayPal Sandbox environment shall be used to simulate transactions without processing real payments. No financial or card details shall be stored on the SmartRecruit platform.
+NFR05
+Availability
+The platform shall maintain 99.5% uptime during standard business hours (8am–10pm AEST, Monday to Friday).
+NFR06
+Scalability
+The database architecture shall support up to 50,000 student profiles and 10,000 job listings without performance degradation.
+NFR07
+Usability
+The platform interface shall be responsive and accessible across modern web browsers on desktop and tablet devices.
+NFR08
+Maintainability
+All PHP code shall follow PSR-12 coding standards to ensure readability and long-term maintainability.
+NFR09
+Compliance
+The platform shall comply with the Australian Privacy Act 1988 regarding storage and handling of personal student and organisation data.
+NFR10
+Reliability
+All foreign key relationships shall use ON DELETE CASCADE to maintain referential integrity across all database tables.
+
+2.5 User Stories
+User stories are short and simple descriptions of feature told in the perspective of the person who desires the new capability, usually a user or customer of the system (Cohn, 2004). User stories are statements of what each actor needs in a simple, non-technical statement. They are applied in the process of requirements gathering in order to make sure that the system is developed against actual user requirements. SmartRecruit has been identified to have the following user stories in three user roles.
+Student User Stories
+ID
+User Story
+Priority
+US01
+As a student, I want to register on the platform using my email, so that I can create a profile and start applying for jobs.
+High
+US02
+As a student, I want to build a profile with my skills, degree, GPA, and career interests, so that the system can match me to relevant jobs.
+High
+US03
+As a student, I want to view a list of jobs matched to my skills, so that I can quickly find relevant employment opportunities.
+High
+US04
+As a student, I want to apply for jobs directly through the platform, so that I can track all my applications in one place.
+High
+US05
+As a student, I want to subscribe to the Premium tier via PayPal, so that I can access career coaching, referrals, and certificates.
+High
+US06
+As a student, I want to view my AI-generated career roadmap, so that I know exactly what skills I need to develop to reach my target role.
+High
+US07
+As a student, I want to see my skill gaps identified clearly, so that I can focus my learning on the most important areas.
+Medium
+US08
+As a student, I want to receive a platform certificate when I complete a milestone, so that I can demonstrate my achievement to employers.
+Medium
+
+Organisation User Stories
+ID
+User Story
+Priority
+US09
+As an organisation, I want to register and create a company profile, so that I can post jobs and access matched student candidates.
+High
+US10
+As an organisation, I want to post job listings with required skills and salary range, so that students can apply and be matched to my roles.
+High
+US11
+As an organisation, I want to view AI-ranked candidates sorted by match score, so that I can quickly identify the most suitable applicants.
+High
+US12
+As an organisation, I want to shortlist candidates and update their application status, so that I can manage my hiring pipeline efficiently.
+High
+US13
+As an organisation, I want to receive a commission invoice via PayPal when I hire a SmartRecruit-referred student, so that the payment process is clear and transparent.
+High
+	
+Admin User Stories
+The following user stories have been identified for the Admin (Platform Owner) actor. 
+These correspond to functional requirements FR15–FR19 in Section 2.3.
+ID
+User Story
+Priority
+US14
+As an admin, I want to approve or reject job postings before they go live, so that I can ensure only legitimate jobs are published on the platform.
+High
+US15
+As an admin, I want to manage all user accounts including activation and suspension, so that I can maintain the security and integrity of the platform.
+High
+US16
+As an admin, I want to create referral records linking a premium student to a partner organisation, so that I can facilitate direct placement and track commission outcomes.
+High
+US17
+As an admin, I want to issue digital certificates and reference letters to premium students, so that I can support their job applications and reward their achievements.
+Medium
+US18
+As an admin, I want to view a complete audit trail of all administrative actions with timestamps and IP addresses, so that I can maintain full accountability on the platform.
+High
+
+2.6 Use Cases
+Use cases are documentation to define the functional behaviour of the system as seen by the user (Pressman and Maxim, 2020). The SmartRecruit has the following use cases. The Use Case Diagram in Appendix B gives a pictorial illustration of all actor-use case relationships.
+Image Number
+Screenshot
+Description of Image
+Figure 5 Use Case Diagram
+
+The above Use Case Diagram illustrates relationships between the four system actors (Student, Organisation, Admin, Payment Gateway) and nine use cases (UC01-UC09) using standard UML notation. Ovals represent use cases and stick figures represent actors.
+
+
+ID
+Use Case Name
+Actor
+Description
+UC01
+Register Account
+Student / Organisation
+The user provides email, password, role. Email uniqueness and account are created by system validates email uniqueness and creates account. User receives confirmation.
+UC02
+Login to Platform
+Student / Organisation / Admin
+User enters email and password. System authenticates identities and initiates a secure session. User is taken to his/her dashboard.
+UC03
+Build Student Profile
+Student
+Student provides personal, academic and career information. Adds skills on the normalised skills list. System calculates profile score.
+UC04
+Post Job Listing
+Organisation
+Organisation Posts job title, description, required skills, salary range and deadline. The listing is approved by the Admin prior to the listing becoming live.
+UC05
+Apply for Job
+Student
+Student chooses a job and applies to it. System matches score by examining the overlap of skills. Status pending Application stored with status pending.
+UC06
+View AI Career Roadmap
+Student (Premium)
+Create personalised career roadmap (JSON) depending on the desired role and current skills of the student. Student views step-by-step milestones and skill gaps.
+UC07
+Admin Refers Student
+Admin
+Admin identifies an appropriate premium student to a job. Admin develops a referral record between the student, organisation and job. Organisation is notified.
+UC08
+Process Subscription Payment
+Student, PayPal
+Premium student chooses the $49/month plan. System redirects to PayPal. PayPal accepts payment and gives back a reference number of the transaction. System activates premium access and records payment.
+UC09
+Process Commission Payment
+Organisation, Admin, PayPal
+Admin confirms student is hired via referral. System computes commission (10-20% of first-year wage). Invoice is forwarded to organisation. Organisation makes payments through PayPal. The payments are made via the payments table.
+
+Detailed Use Case — UC08: Process Subscription Payment
+Field
+Detail
+Use Case ID
+UC08
+Use Case Name
+Process Subscription Payment
+Actor
+Student, Payment Gateway (PayPal)
+Trigger
+Student selects the Premium plan and clicks Subscribe
+Precondition
+Student is logged in and on the Premium Upgrade page
+Main Flow
+1. Student chooses Premium plan (49/month). 2. PayPal payment button appears on the system. 3. Student makes PayPal payment. 4. PayPal gives back a reference number of the transaction. 5. System inserts a record into the payments table with a status = success. 6. System updates subscriptions table status = active. 7. System sets students.is_premium = 1. 8. Display on the system confirms to the student.
+Alternative Flow
+3a. Failed or cancelled payment - System sets payment = failed - Student is displayed with error message - Student is allowed to re-try.
+Postcondition
+Student has active Premium subscription. is_premium = 1. Payment record stored with PayPal reference.
+Business Rule
+SmartRecruit does not store any payment card details. PayPal manages all the financial information. The PayPal Sandbox environment is utilized during the development and testing phase to simulate all the payment transactions without the need to transfer real money.
+
+Detailed Use Case — UC09: Process Commission Payment
+Field
+Detail
+Use Case ID
+UC09
+Use Case Name
+Process Commission Payment
+Actor
+Organisation, Admin, Payment Gateway (PayPal)
+Trigger
+Admin confirms that a SmartRecruit-referred student has been hired
+Precondition
+Referral record exists with status = hired. Commission record exists with payment_status = pending.
+Main Flow
+1. On update, referral status is updated to hired. 2. System calculates commission: first years salary x commission rate/100. 3. System will create a commission invoice and forwarded it to the organisation. 4. Organisation makes payments through PayPal in 30 days. 5. Payment in system is recorded in system by admin. 6. System generates payment record - status = success. 7. Commissions are done through system updates.payment_status = paid.
+Alternative Flow
+4a. Disputes within an organisation sum = commission status = disputed sum = Admin reviews and resolves dispute. 
+
+Postcondition
+Commission marked as paid. Payment record stored. Revenue recorded in system.
+Business Rule
+Commission rate is 10–20% of first-year salary. Example: $70,000 × 15% = $10,500. Invoice must be paid within 30 days of student start date.
+
+
+3. Conceptual Model
+A conceptual model is a depiction of a system, which employs concepts and ideas to represent said depiction (Seetharaman et al., 2014). SmartRecruit conceptual model explains the technologies that should be developed, a description of how the system components will interact, and a description of the architectural pattern used to design the system. The model offers a high-level plan of the system prior to the specification of technical details.
+3.1 Technologies Used
+The design and development of SmartRecruit platform have involved the careful selection of several technologies. The selection focuses on open-source tools, industry-standard frameworks, and technologies that enable quick development with high community support.
+
+Category
+Technology
+Purpose
+Backend Language
+PHP 8.1
+Server-side scripting for business logic, authentication, job matching, and API integration.
+Database
+MySQL 8.0
+Relational database for storing all 17 normalised entities with referential integrity enforced via foreign keys.
+Frontend
+HTML5, CSS3, JavaScript
+Standard web technologies for building the responsive user interface.
+Development Server
+XAMPP (Apache)
+Local development environment providing Apache, MySQL, and PHP for prototype testing.
+Payment Gateway
+PayPal
+Third-party payment processor for Premium subscription fees ($49/mo) and organisation commission collections.
+Database Security
+PDO Prepared Statements
+Prevents SQL injection by parameterising all database queries.
+Password Security
+BCrypt (cost 10)
+Industry-standard hashing algorithm ensuring plaintext passwords are never stored.
+Version Control
+Git / GitHub
+Source code tracking and change management throughout development.
+Diagramming
+draw.io
+Used to produce ERD, DFD, Use Case Diagram, and System Architecture diagrams.
+UI Design
+HTML / CSS Prototype
+High-fidelity wireframes implemented as interactive HTML/CSS screens.
+
+3.2 System Overview
+The SmartRecruit system is designed in the form of three-tiered web-based application. The presentation layer is made up of HTML, CSS and JavaScript using an Apache web server. The application layer is where all the PHP business-logic such as user authentication, job matching algorithms, career roadmap generation, payment processing, and administration functions are found. The data layer is a 17 normalised tables MySQL 8.0 database holding the data.
+ The diagram below represents the overall system architecture, by which the frontend will interact with the PHP application layer, which, in turn, will interact with the MySQL database and the PayPal payment gateway.
+Image Number
+Screenshot
+Description of Image
+Figure 1 System Architecture
+
+
+The above diagram presents the three-tier MVC system architecture of the Smart Recruit platform. The presentation layer uses HTML, CSS, and JavaScript. The application layer contains all PHP business logic. The data layer is a MySQL 8.0 relational database with 17 normalised tables. PayPal is shown as the external payment gateway.
+
+
+The following DFD diagrams give an in-depth perspective of the data flows through the system at three levels. The Level 0 context diagram demonstrates the single process SmartRecruit with all external entities. The Level 1 diagram will break down the system to five key processes. The Level 2 diagrams will give an in-depth perspective of each process.
+
+Image Number
+Screenshot
+Description of Image
+Figure 2 DFD Level 0 Context
+
+
+The above Level 0 Data Flow Diagram (Context Diagram) represents the entire Smart Recruit system as a single process surrounded by four external entities: Student, Organisation, Admin, and Payment Gateway (PayPal). Arrows show data flowing into and out of the system boundary.
+
+Image Number
+Screenshot
+Description of Image
+Figure 3 DFD Level 1 Processes
+
+The above Level 1 Data Flow Diagram decomposes Smart Recruit into five main processes: P1 User Management, P2 Job Matching, P3 Career Guidance, P4 Payment Processing, and P5 Administration. Data flows between external entities, processes, and data stores are shown using directional arrows.
+
+
+3.3 Architectural Pattern
+The Model-View-Controller (MVC) is a software architecture pattern that divides an application into three major sections: the Model, which contains data and business logic; the View, which is in charge of the user interface; and the Controller, which processes input and orchestrates between Model and View (Fowler, 2003).
+ SmartRecruit is based on the MVC architecture style. The Model layer handles all database interactions using PDO prepared statements, and imposes business rules like calculating match scores and validating subscriptions. View layer will render the HTML templates with dynamic data sent by the controller, which will cleanly separate the presentation and logic. The Controller layer processes all of the HTTP requests, manages the user sessions, does input validation, and routes requests to the right model and view components.
+Layer
+Component
+Technology
+Responsibility
+Presentation
+View
+HTML / CSS / JavaScript
+Renders user interface for students, organisations, and admin.
+Application
+Controller
+PHP 8.1
+Handles HTTP requests, session management, routing, and input validation.
+Application
+Model
+PHP + PDO
+Database queries, data validation, and business rule enforcement.
+Data
+Database
+MySQL 8.0
+Stores all persistent data across 17 normalised tables.
+External
+Payment
+PayPal API
+Processes all subscription, booking, and commission payments.
+
+
+4. Design Viewpoints
+A design viewpoint is a set of patterns, templates and conventions of constructing one type of view (ISO/IEC/IEEE 42010, 2011). 
+The design viewpoints section introduces four perspectives on the SmartRecruit system design: the logical viewpoint that displays class and entity relationships, the information viewpoint that documents the database design, the interface viewpoint that shows the front-end wireframes, and the interaction viewpoint that depicts the process and workflow diagrams.
+4.1 Logical Viewpoint — Object and Class Design
+"The logical viewpoint mostly supports the functional requirements of a system. The system is broken down into a set of key abstractions borrowed off the problem domain, in the form of objects or object classes that exploit the principles of abstraction, encapsulation and inheritance (Kruchten, 1995). 
+The rational perspective of SmartRecruit is the Entity Relationship Diagram (ERD) presented below. The ERD is based on the Crowfoot notation and is normalised to the Third Normal Form (3NF). In the diagram, there are 17 entities arranged into five groups of domains: authentication, profiles, recruitment, commercial and skills management. Some important design choices in the logical model are the use of a separate normalised skills entity to avoid the use of comma-separated text fields in violation of the first normal form, calculation of match_score as a DECIMAL(5,2) field at application time, and the use of JSON fields to store career roadmap and skill gap data in the recommendations table. To preserve referential integrity, all foreign key relationships are enforced with ON DELETE CASCADE.
+Image Number
+Screenshot
+Description of Image
+Figure 4 ERD — 17 Entities
+
+The above Entity Relationship Diagram (ERD) presents all 17 database entities for SmartRecruit using Crows Foot notation, normalised to Third Normal Form (3NF). All foreign key relationships enforce ON DELETE CASCADE. Key entities include users, students, organisations, job_postings, applications, recommendations, subscriptions, referrals, commissions, and payments.
+
+
+4.2 Information Viewpoint — Database Design
+A well designed database will reduce redundant data, and will maintain data integrity by implementing normalisation rules (Date, 2004). 
+
+The SmartRecruit database comprises 17 tables that have been normalised to the Third Normal Form. Each table has integer auto-increment primary key, and has referential integrity that is enforced by ON DELETE CASCADE on all foreign key relationships. The database is implemented in MySQL 8.0. A summary of all the 17 entities is given in the table below. 
+
+#
+Table
+PK
+Key Fields & Purpose
+1
+users
+user_id
+Central authentication. Stores email (UK), BCrypt password, role (ENUM), verification status.
+2
+students
+student_id
+FK: user_id. Academic profile, resume URL, profile score, is_premium flag (TINYINT).
+3
+organisations
+org_id
+FK: user_id. ABN, industry, location, is_partner flag.
+4
+job_postings
+job_id
+FK: org_id. Title, type (ENUM), salary range, deadline, status (ENUM).
+5
+applications
+app_id
+FK: student_id, job_id. match_score DECIMAL(5,2), status, is_referred. UNIQUE(student_id, job_id).
+6
+recommendations
+rec_id
+FK: student_id. target_role, career_roadmap (JSON), skill_gaps (JSON), completion_pct.
+7
+subscriptions
+sub_id
+FK: student_id. plan (ENUM), amount_paid, start/end dates, payment_ref, status.
+8
+referrals
+referral_id
+FK: student_id, org_id, job_id, admin_id. Referral and hiring date tracking.
+9
+commissions
+commission_id
+FK: referral_id, org_id. first_year_salary, commission_rate DECIMAL(4,2), invoice dates.
+10
+certificates
+cert_id
+FK: student_id. cert_name, issued_by, issue_date, verify_code (UK).
+11
+training_sessions
+session_id
+Title, partner_name, mode (ENUM), session_date, seats_total, seats_remaining, price.
+12
+bookings
+booking_id
+FK: student_id, session_id. amount_paid, status, attended. UNIQUE(student_id, session_id).
+13
+skills
+skill_id
+Normalised skill master list. skill_name (UK), category, level (ENUM).
+14
+student_skills
+id
+Junction table: students x skills. FK: student_id, skill_id. proficiency, verified.
+15
+job_skills
+id
+Junction table: job_postings x skills. FK: job_id, skill_id. importance (ENUM).
+16
+admin_logs
+log_id
+FK: admin_id. action, target_table, old_value (JSON), new_value (JSON), ip_address.
+17
+payments
+payment_id
+FK: payer_id. amount, currency (AUD), gateway (PayPal), gateway_ref, status (ENUM).
+
+4.3 Interface Viewpoint — Front End Design
+"The interface viewpoint covers the user interface design of the system, including screen layouts, navigation flows, visual design standards, and the interaction between users and the system. Front-end design should be considered from an HTML structure perspective and should be designed for web-based interfaces (ICT307A Course Notes, 2026)." 
+ The front-end of SmartRecruit was developed in three stages. First, low-fidelity wireframes were created to establish the layout and navigation hierarchy of each screen. Second, high-fidelity wireframes were developed implementing the full brand design system. Third, an HTML prototype was built with all 8 screens running on the XAMPP local development server.
+Design System
+ The SmartRecruit design system is based on a colour palette of navy and blue. The main colour is the Navy that is used in the form of headers, navigation, and other important components. The secondary colour is #185FA5 (Blue) which is used as buttons, links, accents. Page backgrounds use the background colour of light grey (colour F0F2F5), and the content cards use white. All indicators of premium features use a colour scheme of premium features that is based on the colours of #D97706 and #92400E (amber). The typeface is Plus Jakarta Sans (heading), and DM Sans (body).
+
+Image Number
+Screenshot
+Description of Image
+Figure 6 Lo-Fi Wireframes
+
+The above image presents the low-fidelity wireframes for all seven Smart Recruit screens in greyscale. These wireframes establish the overall layout and navigation structure before full colour design is applied, covering Login, Dashboard, Job Listings, Career Roadmap, Organisation Dashboard, Premium Upgrade, and Payment screens.
+
+Image Number
+Screenshot
+Description of Image
+Figure 7 Hi-Fi Screen 1: Login
+
+
+The above high-fidelity wireframe presents the Login and Register screen using a split-panel layout. The left panel displays the Smart Recruit brand in navy (#1E3A5F) with a feature summary. The right panel contains the login form with tab switching between Login and Register modes.
+
+Image Number
+Screenshot
+Description of Image
+Figure 8 Hi-Fi Screen 2: Dashboard
+
+The above high-fidelity wireframe presents the Student Dashboard featuring a sidebar with profile summary, four stat cards showing job matches, applications, shortlisted count and top match score, a Premium upgrade banner, and three recommended job cards with match score badges.
+
+Image Number
+Screenshot
+Description of Image
+Figure 9 Hi-Fi Screen 3: Jobs
+
+The above high-fidelity wireframe presents the Job Listings screen with a search bar, filter chips, and job cards displaying company name, location, salary range, required skill tags, and match score badge. A right panel shows the student skill profile and identified skill gaps.
+
+Image Number
+Screenshot
+Description of Image
+Figure 10 Hi-Fi Screen 4: Roadmap
+
+
+The above high-fidelity wireframe presents the Career Roadmap screen for Premium students. A step-by-step plan is displayed with colour-coded status: green for completed, blue for active, and grey for upcoming steps. Skill gaps and profile strength percentage are shown in the right panel.
+
+Image Number
+Screenshot
+Description of Image
+Figure 11 Hi-Fi Screen 5: Organisation
+
+The above high-fidelity wireframe presents the Organisation Dashboard with four metrics: active jobs, total candidates, shortlisted, and Smart Recruit referrals. AI-ranked candidate cards show match scores and referred badges. A right panel displays the commission structure.
+
+Image Number
+Screenshot
+Description of Image
+Figure 12 Hi-Fi Screen 6: Premium
+
+The above high-fidelity wireframe presents the Premium Upgrade screen with a three-column plan comparison: Free Tier, Premium at $49 per month, and Organisation plan. Included features are marked with green ticks and excluded features with grey crosses.
+
+Image Number
+Screenshot
+Description of Image
+Figure 13 Hi-Fi Screen 7: Payment
+
+The above high-fidelity wireframe presents the payment screen where Premium students process subscription payments via PayPal. A notice confirms no card details are stored on SmartRecruit. The student referral status is shown in the right panel.
+
+
+Screen
+Name
+Key Features
+1
+Login / Register
+Split-panel layout. Left brand panel with feature list. Right panel with login and register tab switcher.
+2
+Student Dashboard
+Sidebar navigation, stat cards showing matches, applications and scores, job recommendation cards, premium upgrade banner.
+3
+Job Listings
+Search bar, filter chips by type and location, job cards with AI match scores, skill gap analysis sidebar.
+4
+Career Roadmap
+Step-by-step progress tracker showing completed, active, and upcoming milestones, skill gap panel, profile strength bar.
+5
+Organisation Dashboard
+Candidate cards with AI match scores, referred badge for SmartRecruit referrals, active jobs list, commission info panel.
+6
+Premium Upgrade
+Three-plan comparison showing Free tier, Premium at $49/month, and Organisation plan. Commission model explanation.
+7
+Payment / Upgrade
+Premium upgrade screen showing two plan options: Free and Premium ($49/mo). PayPal payment button. Commission model explanation for organisations.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+	
+
+
+
+
+Image Number
+Screenshot
+Description of Image
+Home page 
+
+
+The SmartRecruit HTML prototype home page is the central landing page of the platform running on the XAMPP local development environment at http://localhost/smartrecruit/. The page is structured into eight sections covering the hero banner with platform statistics, project information, core features, how it works, revenue model, technology stack, all 17 database tables, project timeline, eight screen cards linking to all prototype screens, and the team section. The home page was built using the SmartRecruit design system with the navy and blue colour scheme, Plus Jakarta Sans headings, and DM Sans body text.
+ 
+4.4 Interaction Viewpoint — Process and Workflow Design
+The interaction viewpoint describes the interaction between the components of the system and how they interact with each other, and with other external entities to complete the functions of the system (Yourdon, 1989)." 
+The SmartRecruit system is recorded in a set of Data Flow Diagrams (DFDs) at three levels of detail. The Level 0 diagram depicts the whole system in a single process with all four external entities, which in this case are Student, Organisation, Admin and Payment Gateway (PayPal). The Level 1 diagram breaks down the system into five major processes, which include: User Management, Job Matching, Career Guidance, Payment Processing, and Administration. These main areas are then further broken down into five Level 2 diagrams that give detailed process flows of each of these main areas.
+Image Number
+Screenshot
+Description of Image
+Figure 14 DFD L2 P1: Student Profile
+
+The above Level 2 DFD details the student profile management sub-processes including registration, email verification, profile creation, skill entry, and profile score calculation. Data flows connect the Student actor to the users, students, student_skills, and skills data stores.
+
+Image Number
+Screenshot
+Description of Image
+Figure 15 DFD L2 P2: Job Mgmt
+
+
+The above Level 2 DFD details the organisation and job management sub-processes including registration, job listing submission, admin approval, and job publication. Data flows connect the Organisation and Admin actors to the organisations, job_postings, and job_skills data stores.
+
+Image Number
+Screenshot
+Description of Image
+Figure 16 DFD L2 P3: Matching
+
+The above Level 2 DFD details the job matching and application sub-processes including skill-based matching, match score calculation as DECIMAL(5,2), application submission, and status tracking. Data flows connect the Student actor to the applications, job_postings, and skills data stores.
+
+Image Number
+Screenshot
+Description of Image
+Figure 17 DFD L2 P4: Career Guidance
+
+The above Level 2 DFD details the career guidance sub-processes for Premium students including roadmap generation, skill gap analysis, coaching management, referral creation, and certificate issuance. Data flows connect Student and Admin actors to the recommendations, referrals, and certificates data stores.
+
+Image Number
+Screenshot
+Description of Image
+Figure 18 DFD L2 P5: Payment
+
+
+The above Level 2 DFD details the payment processing sub-processes for both revenue streams: Premium subscription activation at $49 per month and organisation placement commission collection at 10-20% of first-year salary. PayPal is shown as the external payment processor.
+
+4.5.1  Class Diagram
+The Class Diagram below presents the nine PHP model classes of the SmartRecruit platform using MVC architecture. Each class shows its private attributes (—) and public methods (+). Student and Organisation both extend the User base class. A Student makes many Applications, has one Recommendation, and an Organisation posts many JobPostings. Data types match the MySQL database including DECIMAL(5,2) for match score and JSON for career roadmap.
+Class
+Key Attributes
+Key Methods
+User
+user_id, email, password, role, is_verified
+register(), login(), hashPassword(), verifyPassword()
+Student
+student_id, gpa, profile_score, is_premium
+getProfile(), calculateProfileScore(), upgradeToPremium()
+Organisation
+org_id, abn, industry, is_partner
+postJob(), getCandidates(), payCommission()
+JobPosting
+job_id, title, salary_min, salary_max, status
+createJob(), getRequiredSkills(), approveJob()
+Application
+app_id, match_score DECIMAL(5,2), status, is_referred
+apply(), calculateMatchScore(), updateStatus()
+Recommendation
+rec_id, career_roadmap JSON, skill_gaps JSON
+generateRoadmap(), identifySkillGaps(), updateProgress()
+Payment
+payment_id, amount, gateway ENUM, gateway_ref
+processPayPal(), confirmPayment(), activatePremium()
+Subscription
+sub_id, plan ENUM, amount_paid, status
+createSubscription(), cancelSubscription(), isActive()
+TrainingSession
+session_id, seats_total, seats_remaining, price
+getSessions(), bookSession(), updateSeats()
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+	
+
+
+Image Number
+Screenshot
+Description of Image
+
+
+
+
+
+
+4.5.2  Sequence Diagrams
+Three sequence diagrams document the step-by-step interaction between system components for the three most critical use cases. Solid arrows show forward messages, dashed arrows show return messages, and red ALT boxes show alternative flows and error handling.
+Sequence Diagram 1 — UC02: Student Login
+Shows nine steps from opening the login page to dashboard loading. PDO prepared statements prevent SQL injection. BCrypt password_verify() compares the stored hash against user input. Two ALT flows: wrong password returns error, email not found prompts registration.
+Image Number
+Screenshot
+Description of Image
+
+
+
+
+
+
+
+Figure 16 — Sequence Diagram: UC02 Student Login | SmartRecruit | ICT307A 2026
+Sequence Diagram 2 — UC05: Apply for Job with AI Match Score
+Shows ten steps including match score calculation. Skills retrieved from student_skills and job_skills tables. Formula: matching skills ÷ total job skills × 100, stored as DECIMAL(5,2). ALT flows: duplicate application rejected by UNIQUE constraint, unauthenticated users redirected to login.
+
+Image Number
+Screenshot
+Description of Image
+
+
+
+
+
+
+Figure 17 — Sequence Diagram: UC05 Apply for Job with Match Score | SmartRecruit | ICT307A 2026
+Sequence Diagram 3 — UC08: Process Premium Subscription via PayPal
+Shows thirteen steps from clicking Subscribe to Premium activation. Three DB operations after payment confirmation: INSERT INTO payments, INSERT INTO subscriptions, UPDATE students SET is_premium=1. PayPal Sandbox used — no real money processed. ALT flow: student cancels payment, is_premium stays 0, no DB changes.
+Image Number
+Screenshot
+Description of Image
+
+
+
+
+
+5. Project Management 
+5.1 Project Model
+ The Agile software development model is the iterative and incremental approach to software development focusing on flexibility, collaboration, and rapid delivery (Pressman and Maxim, 2020). 
+SmartRecruit is based on the Agile Software Development Life Cycle. The Agile methodology was chosen due to such factors as the ability to refine requirements as the project progresses, the support of iterative delivery of working prototypes, and the reduction of the risk of developing the wrong features due to the ability to review and refine it regularly. This especially applies to a new platform where user requirements and market fit are undergoing checks throughout the development process. 
+The project was broken down into six phases under an eight-week development plan: Planning, Requirements Analysis, Design, Development, Testing, and Documentation. Each of these phases is based on the previous phases and works on subsequent phases started before the earlier phases were completely finished, which is indicative of the iterative nature of Agile development.
+5.2 Project Planning
+The Gantt chart presented below indicates the complete eight-week project, with each stage and the related activities plotted against the weekly schedule. The Week 8 status is highlighted in yellow and is the current status. Tasks that are done are then indicated with a tick mark. 
+
+Image Number
+Screenshot
+Description of Image
+Figure 19 Gantt Chart
+
+The above Gantt chart presents the eight-week project schedule colour-coded by phase. Week 8 is highlighted in yellow as the current week. Completed tasks show a tick mark. Four milestones are marked: Charter completion, Design Review, Prototype Demo, and Final Submission.
+
+
+Phase
+Key Activities
+Weeks
+Status
+Phase 1 — Planning
+Project Charter, Stakeholder Analysis, Risk Management Plan
+Wk 1–2
+Completed ✓
+Phase 2 — Requirements
+FR01–FR20, NFR01–NFR10, User Stories US01–US13, Use Cases UC01–UC09
+Wk 2–4
+Completed ✓
+Phase 3 — Design
+ERD, DFD, System Architecture, Use Case Diagram, Hi-Fi Wireframes
+Wk 4–7
+Completed ✓
+Phase 4 — Development
+MySQL database, PHP prototype, PayPal integration
+Wk 7–8
+Planned
+Phase 5 — Testing
+Test Cases TC01–TC17, UAT, bug fixing
+Wk 7–8
+In Progress
+Phase 6 — Documentation
+Gantt Chart, RACI Matrix, Glossary, Final report
+Wk 7–8
+In Progress
+
+5.3 Project Responsibilities
+A RACI matrix is a project management tool that defines roles and responsibilities of any activity within a project or business operation (PMI, 2021).
+ SmartRecruit is a personal capstone project that was designed by Deepak under the guidance of Cesar. The two project actors have their responsibilities defined in the RACI Matrix below throughout all the stages of the SmartRecruit capstone. Deepak has the Responsibility (R) to perform all the development, design and documentation work. All approval and review decisions are Accountable (A) and Consulted (C) on key technical directions.
+Image Number
+Screenshot
+Description of Image
+Figure 20 RACI Matrix
+
+The above RACI Matrix defines responsibilities across all project phases for two actors: Deepak (Student/Developer) and Cesar (Lecturer/Supervisor). Deepak holds Responsible (R) for all development tasks. Cesar holds Accountable (A) for all approvals. The matrix covers Planning, Requirements, Design, Development, Testing, Documentation, and Future Plan phases.
+
+
+
+5.4 Project Budget
+A project budget is an estimate of the estimated costs required to complete the project (Pressman and Maxim, 2020).
+ The project budget of SmartRecruit is pegged on the estimated effort in hours of development. Since it is a university capstone project, there is no actual financial investment necessary at the stage of development. All tools and structures employed are open-source or free of charge to be used by students. The following table indicates the number of hours that were estimated to be spent in each stage of the project.
+ 
+Phase
+Activities
+Estimated Hours
+Estimated Cost
+Planning
+Project Charter, stakeholder analysis, risk management
+20 hours
+$0
+Requirements
+FR, NFR, user stories, use cases
+30 hours
+$0
+Design
+ERD, DFD, architecture, hi-fi wireframes
+40 hours
+$0
+Development
+MySQL database, PHP/frontend development (planned)
+50 hours
+$0
+Testing
+Test cases, UAT, bug fixing
+20 hours
+$0
+Documentation
+Gantt, RACI, Glossary, Final Report
+25 hours
+$0
+Total
+
+185 hours
+$0
+
+The development tools employed in the project are free and open-source such as PHP, MySQL, XAMPP, draw.io, HTML, CSS and JavaScript. PayPal payment gateway does not have a monthly fee and only includes a transaction rate when live payments are being made, which does not apply during the development and testing phase.
+5.5 Project Schedule
+The project is based on an eight-week schedule in line with the trimester of ICT307A at Excelsia University College. The progress was reviewed once a week and in consultation with the supervising lecturer, Cesar. This is the Week 8 of a project, which is the last documentation and submission week. 
+
+
+6. Assumptions, Dependencies and Concerns
+6.1 Assumptions
+The assumptions used in planning and development of SmartRecruit platform are the following.
+ The students can use the platform with a modern web-browser and a stable internet connection. 
+• Organisations are registered and have a valid Australian Business Number (ABN) in Australia.
+ • All AUD transactions are secured with PayPal. SmartRecruit does not keep any payment cards information on the platform. 
+It will be trained partners who will have the correct, current details on the session and will be able to manage their capacity. 
+Prototyping: The prototype phase involves using a set of pre-defined rules of skill mapping in the prototype machine learning model, rather than a live model. Student enrolment information is self-reported and is not compared to external university systems in the current version.
+6.2 Dependencies
+The main dependencies of the SmartRecruit platform are as follows: when broken, the system may fail to operate. 
+The development environment will be based on XAMPP (Apache + MySQL) after the implementation phase starts, pending lecturer approval. 
+Payment processing: This will require the accessibility of the PayPal API. In case PayPal goes offline, any payment capabilities will be disabled in the meantime. 
+The matching algorithm of jobs requires that students must have complete and up to date skill profiles in order to generate meaningful match scores. 
+
+6.3 Constraints
+The current version of the SmartRecruit platform has the following constraints.
+ • The prototype is meant to be deployed on single server and is not yet configured to support horizontal scaling and load balancing. 
+File uploads of student resumes are restricted to PDF format with a maximum file size of 5MB. 
+• At present, the platform allows supporting only the English language. A future release is scheduled to have multilingual support.
+ Mobile responsiveness is optimised to screens with 768px and over. The smaller devices will be fully mobile optimised during Phase 2.
+
+7. Risk Management Plan
+7.1 Risk Identification
+Risk identification is defined as the process of identifying the risks that may impact the project, and recording their nature (PMI, 2021)."
+ The table below shows the listed risks on SmartRecruit platform, their likelihood, impact and risk rating.
+ID
+Risk Description
+Likelihood
+Impact
+Rating
+R01
+PayPal payment gateway experiences downtime during subscription or commission payment processing.
+Low
+High
+Medium
+R02
+Unauthorised access to student or organisation personal data stored in the database.
+Low
+Critical
+High
+R03
+Organisation disputes the commission charge after a referred student is hired.
+Medium
+High
+High
+R04
+Low student adoption in the initial platform launch phase.
+Medium
+High
+High
+R05
+AI match score algorithm produces inaccurate results for some student-job combinations.
+Medium
+Medium
+Medium
+R06
+Training partner cancellation
+Low
+High
+Medium
+R07
+Database performance degrades as the number of students and job listings grows.
+Low
+Medium
+Low
+R08
+Privacy Act 1988 compliance breach due to improper handling of personal data.
+Low
+Critical
+High
+R09
+Project deliverables are not completed by the submission deadline.
+Medium
+Medium
+Medium
+R10
+Critical system functionality stops working due to a PHP or MySQL configuration error.
+Medium
+High
+High
+R11
+The platform lacks sufficient funding to cover ongoing server hosting, domain registration, and PayPal transaction fees after the initial development phase.
+Medium
+High
+High
+R12
+Training partner organisations become unavailable or withdraw from the platform, leaving premium students without access to booked sessions and certificates.
+Medium
+High
+High
+R13
+Established competitors such as Seek, LinkedIn, and Indeed introduce similar skill-based matching features, reducing SmartRecruit's competitive advantage in the graduate market.
+High
+High
+High
+R14
+SmartRecruit faces legal liability if a referred student is dismissed or a commission dispute escalates to formal legal action under Australian consumer law.
+Low
+Critical
+High
+
+
+7.2 Risk Analysis
+Risk analysis is a process that helps determine the likelihood and the potential consequences of each of the identified risks. High-Risk implies that the mitigation strategies must be implemented immediately, and constant monitoring of the project is required. The mitigation strategy of each of the identified risks is recorded in the table below.
+
+ID
+Risk
+Mitigation Strategy
+R01
+PayPal downtime
+Display maintenance message to users. Re-pay at subsequent login. Email notification to affected student or organisation. 
+
+R02
+Data breach
+Hashing of passwords in BCrypt, using PDO prepared statements, enforcement of HTTPS, security of a session, and regular security testing of PHP code. 
+
+R03
+Commission dispute
+Well defined commission terms that are made and accepted at the time of organisation registration. Disputes resolution procedure accessible at the admin panel. 
+
+R04
+Low student adoption
+Provide a free plan to minimize the hassle of onboarding. Collaborate with universities in outreach to students. Use social media campaigns and LinkedIn. 
+
+R05
+Inaccurate match scores
+Enable the students to mark mismatches to be reviewed by the administration. Manual score override. Constantly optimize the matching algorithm.
+R06
+Training partner cancellation
+Check session details with training partner 48 hours prior to session. Provide the enrolled students with a complete refund in case of cancellation of the session. Immediately inform all the affected students through platform notification.
+R07
+Database performance
+Use indexing on all the foreign key columns. Optimise queries that are slow with MySQL EXPLAIN. Plan for read replicas in Phase 2.
+R08
+Privacy compliance
+Post a privacy policy at the time of registration. Use principles of minimisation of data. Carry out a compliance check prior to actual launch.
+R09
+Missed deadline
+Progress meetings with Gantt chart comparison on a weekly basis. Focus on MVP features and push off Phase 2 features as necessary.
+R10
+System configuration error
+Keep a local copy of all the XAMPP configuration files. Always check all features following any configuration change before going on.
+R11
+Lack of funding
+Apply for university startup grants and student innovation funding. Keep infrastructure costs minimal by using shared hosting in Phase 1. Explore revenue reinvestment from Premium subscriptions to cover operational costs.
+R12
+Training partner unavailability
+Maintain agreements with at least three training partners at all times. Have backup session providers identified for each skill category. Notify students immediately and issue full refunds if a partner withdraws.
+R13
+Competitor threat
+Focus on the niche graduate and university student market that large platforms ignore. Continue improving the skill-based matching algorithm. Build university partnerships that large competitors cannot easily replicate.
+R14
+Legal liability
+Engage a legal advisor before platform launch to draft terms and conditions. Include clear commission and referral agreements signed by organisations at registration. Obtain professional indemnity insurance before going live.
+
+7.3 Risk Evaluation
+According to the above risk analysis, data breach (R02), organisation commission disputes (R03), and privacy compliance (R08) are the three highest-priority risks to the SmartRecruit platform. These risks are classified as High because they may have serious operational, financial or legal impacts. Proactive mitigation strategies have been implemented on all of them, as part of the system design and operational processes. R02 is addressed by using BCrypt hashing and by using PDO prepared statements constructed into the PHP codebase. Mitigation on R03 is achieved by well written commission terms at the time of organisation registration. R08 is alleviated by publishing a privacy policy and data minimisation practices.
+
+
+8. Meeting Times and Communication
+8.1 Communication Plan
+This project will mainly use weekly face-to-face consultation with the supervising lecturer, Cesar as the primary mode of communication. Moreover, the student developer keeps personal records of progress by using a daily task manager to make sure that milestones are achieved at the proper time.
+
+Meeting Type
+Frequency
+Platform
+Purpose
+Supervisor Consultation
+Weekly
+In-person (class)
+Progress review, deliverable feedback, and requirement clarification.
+Development Review
+Weekly
+Self-review
+Go through features completed, update the Gantt chart, find and fix blockers.
+Daily Task Review
+Daily
+Personal tracker
+Check on daily activities, update and schedule activities to be done on the next day.
+
+8.2 Meeting Minutes
+
+Meeting
+Week
+Date
+Outcomes / Actions
+Meeting 1
+Week 2
+2026
+Student was aware of the assessment structure. Concurred to start researching an appropriate project topic. Action: Choose a project topic and discuss it at the following meeting.
+Meeting 2
+Week 3
+2026
+Topic approved. Project Charter accepted. Action: Start the process of requirements analysis with the functional and non-functional requirements.
+Meeting 3
+Week 4
+2026
+Student to add student progress upload feature to requirements. Action: FR update and start DFD Level 0 and Level 1.
+Meeting 4
+Week 5
+2026
+DFDs and requirements that have been approved. Action: Finalize design phase such as ERD, wireframes and system architecture.
+Meeting 5
+Week 6
+2026
+Student continued self-directed development work on ERD and lo-fi wireframes.
+Meeting 6
+Week 7
+2026
+Lecturer action list: (1) High fidelity wireframes, (2) Include bank/payment in design, (3) Start report, (4) Complete glossary, (5) Add Gantt chart, (6) Build PHP prototype, (7) Create RACI Matrix. 
+
+Meeting 7
+Week 8
+2026
+All feedback implemented: PayPal Sandbox was added to NFR04 and UC08. Competitor analysis added to Section 1.1. The external entities are increased in the Section 2.2. Acronyms transferred to Appendix A. Class/sequence diagrams to be transferred to final submission.
+
+
+Meeting 8
+Week 9
+2026
+Progress review: Admin User Stories US14–US18 added. Company-side risks R11–R14 added. Class Diagram and 3 Sequence Diagrams completed and inserted into report. HTML prototype running on XAMPP with 8 screens and CSS styling. Home page screenshot added. Gantt Chart updated to 31 May 2026. Section 4.5 Behavioural Viewpoint added.
+Meeting 9
+Week
+10
+2026
+Final report review before submission deadline of Sunday 31 May 2026. All major components confirmed complete: ERD, DFD L0/L1/L2, Use Case Diagram, Class Diagram, 3 Sequence Diagrams, Lo-Fi and Hi-Fi Wireframes, Gantt Chart, RACI Matrix, MySQL database 17 tables, HTML prototype 8 screens. Report sections 1–8 complete. Submission on track.
+Meeting 10
+Week 11
+
+
+Meeting 11
+Week 12
+
+
+
+
+References
+All references follow APA 7th Edition format.
+
+Cohn, M. (2004). User stories applied: For agile software development. Addison-Wesley.
+
+Glassdoor. (2023). Job search experience survey: Candidate feedback on recruitment platforms. Glassdoor Inc. https://www.glassdoor.com/research/
+
+Indeed. (2023). About Indeed. Indeed Inc. https://au.indeed.com/about
+
+LinkedIn. (2023). About LinkedIn. LinkedIn Corporation. https://about.linkedin.com
+
+Porter, M. E. (1980). Competitive strategy: Techniques for analysing industries and competitors. Free Press.
+
+SEEK Learning. (2022). Australian job seeker report: Insights into the candidate experience. SEEK Limited. https://www.seek.com.au/about/news/
+
+Date, C. J. (2004). An introduction to database systems (8th ed.). Pearson.
+
+Fowler, M. (2003). Patterns of enterprise application architecture. Addison-Wesley.
+
+IEEE. (2011). IEEE standard glossary of software engineering terminology (IEEE Std 610.12-1990). IEEE.
+
+ISO/IEC/IEEE. (2011). Systems and software engineering — Architecture description (ISO/IEC/IEEE 42010). International Organization for Standardization.
+
+Kruchten, P. (1995). Architectural blueprints — the "4+1" view model of software architecture. IEEE Software, 12(6), 42–50. https://doi.org/10.1109/52.469759
+
+MySQL. (2023). MySQL 8.0 reference manual. Oracle Corporation. https://dev.mysql.com/doc/refman/8.0/en/
+
+Office of the Australian Information Commissioner. (2023). Privacy Act 1988. Australian Government. https://www.oaic.gov.au/privacy/the-privacy-act
+
+PHP Group. (2023). PHP: PDO — manual. PHP Documentation. https://www.php.net/manual/en/book.pdo.php
+
+PMI. (2021). A guide to the project management body of knowledge (PMBOK guide) (7th ed.). Project Management Institute.
+
+Pressman, R. S., & Maxim, B. R. (2020). Software engineering: A practitioner's approach (9th ed.). McGraw-Hill.
+
+Seetharaman, A., Saucier, D., & Lamperillo, G. (2014). Software design and development in a service oriented environment. U.S. Patent 8,887,130.
+
+Sommerville, I. (2016). Software engineering (10th ed.). Pearson.
+
+PayPal. (2023). PayPal documentation — payments. PayPal Inc. https://paypal.com/docs/payments
+
+Yourdon, E. (1989). Modern structured analysis. Prentice Hall.
+
+
