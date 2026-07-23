@@ -1,0 +1,7 @@
+[build]
+pkgs = ["php82", "php82Extensions.mysqli", "php82Extensions.pdo_mysql"]
+
+[start]
+runImage = "ubuntu:22.04"
+baseImage = "mcr.microsoft.com/devcontainers/php:1-8.2"
+cmd = "php -S 0.0.0.0:${PORT:-8080}"
