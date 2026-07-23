@@ -1,9 +1,9 @@
 <?php
 try {
     $pdo = new PDO(
-        'mysql:host=aws.connect.psdb.cloud;dbname=smartrecruit;charset=utf8mb4',
-        'ud613zr2bhkrz75e1ifc',
-        'pscale_pw_YFhN8CyGU9t6sRtPAiMuVlP76rIb50T5Y8VAiuLyLT',
+        'mysql:host=127.0.0.1;port=3306;dbname=smartrecruit;charset=utf8mb4',
+        'root',
+        '',
         [
             PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
             PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC
